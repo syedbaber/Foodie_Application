@@ -47,7 +47,7 @@ public class Chef_Post_Dish extends AppCompatActivity {
     ImageButton imageButton;
     Button post_dish;
     TextInputLayout dishN, desc,qty,pri;
-    String dishName,descrption,quantity,price,dishes;
+    String dishName,descrption,quantity,price;
     Uri imageuri;
     private Uri mcropimageuri;
     FirebaseStorage storage;
@@ -87,7 +87,7 @@ public class Chef_Post_Dish extends AppCompatActivity {
                     imageButton.setOnClickListener(v -> onSelectImageclick(v));
 
                     post_dish.setOnClickListener(v -> {
-                        dishName = dishN.getEditText().toString().trim();
+                        dishName = dishN.getEditText().getText().toString().trim();
                         descrption = desc.getEditText().getText().toString().trim();
                         quantity = qty.getEditText().getText().toString().trim();
                         price = pri.getEditText().getText().toString().trim();

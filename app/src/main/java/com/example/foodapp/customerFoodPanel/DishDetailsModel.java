@@ -1,7 +1,7 @@
 package com.example.foodapp.customerFoodPanel;
 
 public class DishDetailsModel {
-    String ChefId, Description, ImageURL, Price, Quantity, RandomUID, dishName;
+    String ChefId, Description, ImageURL, Price, Quantity, RandomUID, DishName;
 
     public DishDetailsModel() {
     }
@@ -13,7 +13,7 @@ public class DishDetailsModel {
         Price = price;
         Quantity = quantity;
         RandomUID = randomUID;
-        this.dishName = dishName;
+        this.DishName = dishName;
     }
 
     public String getChefId() {
@@ -65,10 +65,10 @@ public class DishDetailsModel {
     }
 
     public String getDishName() {
-        return dishName;
+        return DishName;
     }
 
     public void setDishName(String dishName) {
-        this.dishName = dishName;
+        this.DishName = dishName;
     }
 }

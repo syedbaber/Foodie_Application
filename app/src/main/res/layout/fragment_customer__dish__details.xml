@@ -18,37 +18,70 @@
             android:layout_width="match_parent"
             android:layout_height="228dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/pizza_pic" />
+            android:src="@drawable/pizza_pic"
+            android:background="@drawable/round_corners"
+            android:layout_margin="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="30dp">
+            android:layout_margin="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/round_corners">
 
             <TextView
                 android:id="@+id/NameHolder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:backgroundTint="@color/white"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="Dish Name"
+                android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:gravity="center"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/PriceHolder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="Price"
-                android:textColor="@color/black"
-                android:gravity="center"/>
+                android:textColor="#D80707"
+                android:textStyle="bold"
+                android:backgroundTint="@color/white"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_corners">
+
+            <ImageButton
+                android:id="@+id/btn_addCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_add_cart_24"
+                android:backgroundTint="#FFFFFF"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@drawable/round_corners"
+            android:layout_margin="10dp"
+            android:backgroundTint="#FFFFFF">
 
             <TextView
                 android:id="@+id/descriptionHolder"
