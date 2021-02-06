@@ -18,7 +18,7 @@ public class DB_Manager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query= "create table tbl_cart (id integer primary key autoincrement, dishName text, price text, description text, imageURL text)";
+        String query= "create table tbl_cart (id integer primary key autoincrement, dishName text, price text, imageURL text)";
         db.execSQL(query);
     }
 
@@ -34,7 +34,7 @@ public class DB_Manager extends SQLiteOpenHelper {
         ContentValues values= new ContentValues();
         values.put("dishName", dishName);
         values.put("price",price);
-        values.put("description",description);
+       // values.put("description",description);
         values.put("imageURL", imageURL);
 
         long result = db.insert("tbl_cart",null,values); //Non-negative and negative values. If insertion Failed negative value will return and vice versa.

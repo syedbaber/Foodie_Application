@@ -1,14 +1,14 @@
 package com.example.foodapp.customerFoodPanel;
 
 public class SQL_DB_Model {
-    String dishName, description, price, imageURL;
+    String dishName, price, imageURL;
 
     public SQL_DB_Model() {
     }
 
-    public SQL_DB_Model(String dishName, String description, String price, String imageURL) {
+    public SQL_DB_Model(String dishName, String price, String imageURL) {
         this.dishName = dishName;
-        this.description = description;
+      //  this.description = description;
         this.price = price;
         this.imageURL = imageURL;
     }
@@ -21,13 +21,13 @@ public class SQL_DB_Model {
         this.dishName = dishName;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+//    public String getDescription() {
+//        return description;
+//    }
+//
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
 
     public String getPrice() {
         return price;

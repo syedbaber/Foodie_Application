@@ -30,9 +30,10 @@ public class Customer_Cart_Fragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         Cursor cursor= new DB_Manager(getContext()).getDbData();
+        dataHolder=new ArrayList<>();
 
         while (cursor.moveToNext()){
-            SQL_DB_Model obj= new SQL_DB_Model(cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4));
+            SQL_DB_Model obj= new SQL_DB_Model(cursor.getString(1),cursor.getString(2),cursor.getString(3));
             dataHolder.add(obj);
         }
 
