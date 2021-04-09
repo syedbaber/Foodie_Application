@@ -24,7 +24,7 @@ public class MainMenu extends AppCompatActivity {
         sign_Up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(MainMenu.this, Chef_User_SignUp_Menu.class);
+                Intent intent= new Intent(MainMenu.this, User_Registration.class);
                 startActivity(intent);
             }
         });
@@ -32,7 +32,7 @@ public class MainMenu extends AppCompatActivity {
         signin_Email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(getApplicationContext(), Chef_User_Login_Menu.class);
+                Intent intent= new Intent(getApplicationContext(), Admin_User_Login_Menu.class);
                 startActivity(intent);
             }
         });

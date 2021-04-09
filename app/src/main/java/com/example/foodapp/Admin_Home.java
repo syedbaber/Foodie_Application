@@ -1,7 +1,6 @@
 package com.example.foodapp;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -9,14 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.foodapp.chefFoodPanel.Chef_Home_Fragment;
-import com.example.foodapp.chefFoodPanel.Chef_Orders_Fragment;
-import com.example.foodapp.chefFoodPanel.Chef_PendingOrders_Fragment;
-import com.example.foodapp.chefFoodPanel.Chef_Profile_Fragment;
-import com.example.foodapp.customerFoodPanel.Customer_Home_Fragment;
+import com.example.foodapp.AdminFoodPanel.Admin_Home_Fragment;
+import com.example.foodapp.AdminFoodPanel.Admin_Orders_Fragment;
+import com.example.foodapp.AdminFoodPanel.Admin_PendingOrders_Fragment;
+import com.example.foodapp.AdminFoodPanel.Admin_Profile_Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Chef_Home extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class Admin_Home extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     BottomNavigationView navigationView;
     Fragment fragment;
@@ -24,7 +22,7 @@ public class Chef_Home extends AppCompatActivity implements BottomNavigationView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef__home);
+        setContentView(R.layout.activity_admin__home);
 
         Toolbar toolbar= findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,18 +35,18 @@ public class Chef_Home extends AppCompatActivity implements BottomNavigationView
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.chefHome:
-                fragment= new Chef_Home_Fragment();
+                fragment= new Admin_Home_Fragment();
                 break;
             case R.id.pendingOrders:
-                fragment= new Chef_PendingOrders_Fragment();
+                fragment= new Admin_PendingOrders_Fragment();
                 break;
 
             case R.id.orders:
-                fragment= new Chef_Orders_Fragment();
+                fragment= new Admin_Orders_Fragment();
                 break;
 
             case R.id.chefProfile:
-                fragment= new Chef_Profile_Fragment();
+                fragment= new Admin_Profile_Fragment();
                 break;
         }
         return loadChefFragment(fragment);

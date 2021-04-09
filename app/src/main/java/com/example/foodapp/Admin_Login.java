@@ -18,7 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Chef_Login extends AppCompatActivity {
+public class Admin_Login extends AppCompatActivity {
 
     private EditText emailId;
     private EditText password;
@@ -30,7 +30,7 @@ public class Chef_Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef__login);
+        setContentView(R.layout.activity_admin__login);
 
         firebaseAuth=FirebaseAuth.getInstance();
         emailId=(EditText)findViewById(R.id.email_Login);
@@ -68,13 +68,13 @@ public class Chef_Login extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(Chef_Login.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent= new Intent(Chef_Login.this, Chef_Home.class);
+                    Toast.makeText(Admin_Login.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent= new Intent(Admin_Login.this, Admin_Home.class);
                     startActivity(intent);
                     finish();
                 }
                 else {
-                    Toast.makeText(Chef_Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Admin_Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
                 }
                 progressDialog.dismiss();
             }

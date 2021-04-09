@@ -6,7 +6,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background_img"
-    tools:context=".Chef_User_SignUp_Menu">
+    tools:context=".Admin_User_SignUp_Menu">
 
 
     <LinearLayout
@@ -33,7 +33,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="80dp"
             android:background="#E91E63"
-            android:text="SignUp As Chef"
+            android:text="SignUp As Admin"
             app:backgroundTint="#E91E63" />
 
         <Button

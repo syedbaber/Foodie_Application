@@ -18,7 +18,8 @@ public class DB_Manager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query= "create table tbl_cart (id integer primary key autoincrement, dishName text, price text, imageURL text)";
+        String query= "create table tbl_cart " +
+                "(id integer primary key autoincrement, dishName text, price text, imageURL text, quantity text)";
         db.execSQL(query);
     }
 
@@ -29,13 +30,13 @@ public class DB_Manager extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public String insertDbData(String dishName, String price, String description, String imageURL){
+    public String insertDbData(String dishName, String price, String imageURL, String quantity){
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues values= new ContentValues();
         values.put("dishName", dishName);
         values.put("price",price);
-       // values.put("description",description);
         values.put("imageURL", imageURL);
+        values.put("quantity", quantity);
 
         long result = db.insert("tbl_cart",null,values); //Non-negative and negative values. If insertion Failed negative value will return and vice versa.
         if(result==-1){
@@ -52,4 +53,20 @@ public class DB_Manager extends SQLiteOpenHelper {
         Cursor cursor= db.rawQuery(query,null);
         return cursor;
     }
+
+    public String deleteSingleRow(int position){
+        SQLiteDatabase db= this.getWritableDatabase();
+        String query= "delete from tbl_cart where id=27 ";
+        db.execSQL(query);
+        return "success " + position;
+    }
+
+    public String DeleteTable(){
+        SQLiteDatabase db= this.getWritableDatabase();
+        String query= "DELETE FROM tbl_cart";
+        db.execSQL(query);
+        return "Cart Cleared Successfully";
+    }
+
+
 }

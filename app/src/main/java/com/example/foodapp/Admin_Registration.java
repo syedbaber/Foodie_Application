@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.foodapp.chefFoodPanel.Chef_Home_Fragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -21,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Chef_Registration extends AppCompatActivity {
+public class Admin_Registration extends AppCompatActivity {
 
     private TextInputLayout txt_fname, txt_lname, txt_email, txt_password, txt_confpassword, txt_phone;
     private Button btn_register;
@@ -33,7 +32,7 @@ public class Chef_Registration extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef__registration);
+        setContentView(R.layout.activity_admin__registration);
 
         firebaseAuth=firebaseAuth.getInstance();
 
@@ -54,7 +53,7 @@ public class Chef_Registration extends AppCompatActivity {
 
 
                 String UserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                reference = FirebaseDatabase.getInstance().getReference("Chef").child(UserId);
+                reference = FirebaseDatabase.getInstance().getReference("Admin").child(UserId);
 
 
 
@@ -115,13 +114,13 @@ public class Chef_Registration extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(Chef_Registration.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
-                    Intent intent= new Intent(Chef_Registration.this, Chef_Home.class);
+                    Toast.makeText(Admin_Registration.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                    Intent intent= new Intent(Admin_Registration.this, Admin_Home.class);
                     startActivity(intent);
                     finish();
                 }
                 else {
-                    Toast.makeText(Chef_Registration.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Admin_Registration.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                 }
                 progressDialog.dismiss();
             }

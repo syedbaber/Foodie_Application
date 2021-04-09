@@ -1,34 +1,36 @@
-package com.example.foodapp.customerFoodPanel;
+package com.example.foodapp.AdminFoodPanel;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.foodapp.Model.Request_Order_Model;
 import com.example.foodapp.R;
+import com.example.foodapp.AdminFoodPanel.Admin_Order_Adapter;
+import com.example.foodapp.AdminFoodPanel.Admin_Order_Adapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Customer_Orders_Fragment extends Fragment {
+public class Admin_Orders_Fragment extends Fragment {
 
     RecyclerView recyclerView;
-    Customer_Order_Adapter adapter;
+    Admin_Order_Adapter adapter;
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_customer__orders_, container, false);
-        getActivity().setTitle("Orders");
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view= inflater.inflate(R.layout.fragment_admin_orders, null);
+        getActivity().setTitle("New Orders");
 
-        recyclerView= view.findViewById(R.id.Order_List);
+        recyclerView= view.findViewById(R.id.Admin_Order_List);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         //Firebase
@@ -39,11 +41,11 @@ public class Customer_Orders_Fragment extends Fragment {
                         .setQuery(query, Request_Order_Model.class)
                         .build();
 
-        adapter= new Customer_Order_Adapter(options);
+        adapter= new Admin_Order_Adapter(options);
         recyclerView.setAdapter(adapter);
 
-
         return view;
+
     }
 
     @Override

@@ -1,13 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".customerFoodPanel.Customer_Cart_Fragment">
+    tools:context=".customerFoodPanel.Customer_Cart_Fragment"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar">
+
+    </include>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="500dp" >
 
-</FrameLayout>
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#cccccc"
+        android:paddingTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total       Rs. "
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:paddingLeft="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/total_Price"
+            android:text="1000"
+            android:textColor="@color/foodPandaColor"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/deleteTable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear Cart"
+            android:layout_marginLeft="20dp"/>
+
+        <Button
+            android:id="@+id/btn_placeOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Place Order"
+            android:layout_marginLeft="100dp" />
+    </LinearLayout>
+
+</LinearLayout>

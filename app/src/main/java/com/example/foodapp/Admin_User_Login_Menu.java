@@ -8,24 +8,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class Chef_User_Login_Menu extends AppCompatActivity {
+public class Admin_User_Login_Menu extends AppCompatActivity {
 
-    Button chefLogin, userLogin;
+    Button adminLogin, userLogin;
     TextView signupTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef__user__login__menu);
+        setContentView(R.layout.activity_admin__user__login__menu);
 
-        chefLogin=(Button)findViewById(R.id.btn_chefLogin);
+        adminLogin=(Button)findViewById(R.id.btn_chefLogin);
         userLogin=(Button)findViewById(R.id.btn_UserLogin);
         signupTV=(TextView)findViewById(R.id.SignupTV);
 
-        chefLogin.setOnClickListener(new View.OnClickListener() {
+        adminLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(getApplicationContext(), Chef_Login.class);
+                Intent intent= new Intent(getApplicationContext(), Admin_Login.class);
                 startActivity(intent);
             }
         });

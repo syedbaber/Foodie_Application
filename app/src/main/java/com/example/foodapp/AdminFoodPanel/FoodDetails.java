@@ -1,4 +1,4 @@
-package com.example.foodapp.chefFoodPanel;
+package com.example.foodapp.AdminFoodPanel;
 
 public class FoodDetails {
      public String DishName, Description, Quantity, Price, ImageURL, RandomUID, ChefId;

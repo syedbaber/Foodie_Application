@@ -54,46 +54,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Quantity"
+                    android:id="@+id/DishQuantity"
                     android:text="1"
+                    android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/foodPandaColor"
                     android:padding="2dp"
                     android:layout_marginTop="12dp"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cart_update_buttons"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/round_corners"
-                    android:visibility="gone">
-
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/btn_plus"
-                        android:background="@drawable/ic_plus_icon_24"
-                        android:padding="15dp"
-                        android:layout_marginRight="15dp"/>
-
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/btn_minus"
-                        android:background="@drawable/ic_minus_24"
-                        android:padding="15dp"
-                        android:layout_marginRight="15dp"/>
-
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/btn_delete"
-                        android:background="@drawable/ic_delete_24"
-                        android:padding="15dp"/>
-
-                </LinearLayout>
 
             </LinearLayout>
 

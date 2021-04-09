@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/admin_order_cardView"
+    android:orientation="vertical"
+    app:cardBackgroundColor="#EEEEEE"
+    app:cardElevation="2dp"
+    app:cardCornerRadius="10dp"
+    app:cardUseCompatPadding="true"
+    android:background="@drawable/round_corners"
+    android:layout_margin="10dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/order_ID"
+            android:text="#12645758"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:padding="15dp"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/order_Status"
+            android:text="Order Status"
+            android:textColor="#FF0000"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/order_Address"
+            android:text="Street 10, I-10/4 Islamabad"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/foodPandaColor"
+            android:padding="2dp"
+            android:layout_marginLeft="10dp"
+            />
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

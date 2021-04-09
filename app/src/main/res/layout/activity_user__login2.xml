@@ -36,7 +36,7 @@
             android:ems="10"
             android:hint="Email ID"
             android:inputType="textEmailAddress"
-            android:text="syedbabermehmood27@gmail.com"/>
+            android:text="syedbabermehmood@gmail.com"/>
 
         <EditText
             android:id="@+id/password_Login"

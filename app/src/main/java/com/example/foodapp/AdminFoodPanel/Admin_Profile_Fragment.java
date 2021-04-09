@@ -1,4 +1,4 @@
-package com.example.foodapp.chefFoodPanel;
+package com.example.foodapp.AdminFoodPanel;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,14 +13,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.foodapp.R;
 
-public class Chef_Profile_Fragment extends Fragment {
+public class Admin_Profile_Fragment extends Fragment {
 
     Button postDish;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v= inflater.inflate(R.layout.fragment_chef_profile, null);
+        View v= inflater.inflate(R.layout.fragment_admin_profile, null);
         getActivity().setTitle("Post Dish");
 
         postDish=(Button)v.findViewById(R.id.btn_postDish);
@@ -28,7 +28,7 @@ public class Chef_Profile_Fragment extends Fragment {
         postDish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(getActivity(), Chef_Post_Dish.class);
+                Intent intent= new Intent(getActivity(), Admin_Post_Dish.class);
                 startActivity(intent);
             }
         });

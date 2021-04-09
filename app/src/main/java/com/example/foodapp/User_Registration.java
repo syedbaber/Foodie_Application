@@ -60,20 +60,20 @@ public class User_Registration extends AppCompatActivity {
                  rootNode= FirebaseDatabase.getInstance();
 
 
-                String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                reference = FirebaseDatabase.getInstance().getReference("User").child(useridd);
-
-                //Get all the values
-                String First_name= txt_fname.getEditText().getText().toString();
-                String Last_name= txt_lname.getEditText().getText().toString();
-                String Email= txt_email.getEditText().getText().toString();
-                String Pwd= txt_password.getEditText().getText().toString();
-                String confPwd= txt_confpassword.getEditText().getText().toString();
-                String Phone= txt_phone.getEditText().getText().toString();
-
-                UserHelperClass helperClass= new UserHelperClass(First_name,Last_name,Email,Pwd,confPwd,Phone);
-
-                reference.setValue(helperClass);
+//                String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//                reference = FirebaseDatabase.getInstance().getReference("User").child(useridd);
+//
+//                //Get all the values
+//                String First_name= txt_fname.getEditText().getText().toString();
+//                String Last_name= txt_lname.getEditText().getText().toString();
+//                String email= txt_email.getEditText().getText().toString();
+//                String Pwd= txt_password.getEditText().getText().toString();
+//                String confPwd= txt_confpassword.getEditText().getText().toString();
+//                String Phone= txt_phone.getEditText().getText().toString();
+//
+//                UserHelperClass helperClass= new UserHelperClass(First_name,Last_name,email,Pwd,confPwd,Phone);
+//
+//                reference.setValue(helperClass);
 
                 Register();  //Registering Email for Authentication
 
@@ -116,20 +116,36 @@ public class User_Registration extends AppCompatActivity {
         progressDialog.show();
         progressDialog.setCanceledOnTouchOutside(false);
 
-        firebaseAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(User_Registration.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
-                    Intent intent= new Intent(User_Registration.this, User_Home.class);
-                    startActivity(intent);
-                    finish();
-                }
-                else {
-                    Toast.makeText(User_Registration.this, "Registration Failed", Toast.LENGTH_SHORT).show();
-                }
-                progressDialog.dismiss();
+        firebaseAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(this, task -> {
+            if(task.isSuccessful()){
+
+                //--------------- Adding Registered Userdata to firebase
+                String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                reference = FirebaseDatabase.getInstance().getReference("User").child(useridd);
+
+                //Get all the values
+                String First_name= txt_fname.getEditText().getText().toString();
+                String Last_name= txt_lname.getEditText().getText().toString();
+                String email= txt_email.getEditText().getText().toString();
+                String Pwd= txt_password.getEditText().getText().toString();
+                String confPwd= txt_confpassword.getEditText().getText().toString();
+                String Phone= txt_phone.getEditText().getText().toString();
+
+                UserHelperClass helperClass= new UserHelperClass(First_name,Last_name,email,Pwd,confPwd,Phone);
+
+                reference.setValue(helperClass);
+
+                //------------------
+
+                Toast.makeText(User_Registration.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                Intent intent= new Intent(User_Registration.this, User_Home.class);
+                startActivity(intent);
+                finish();
             }
+            else {
+                Toast.makeText(User_Registration.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+            }
+            progressDialog.dismiss();
         });
 
     }

@@ -1,5 +1,7 @@
 package com.example.foodapp.customerFoodPanel;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +22,12 @@ import com.example.foodapp.R;
 
 import java.util.ArrayList;
 
+import static java.security.AccessController.getContext;
+
 public class Customer_Cart_Adapter extends RecyclerView.Adapter<Customer_Cart_Adapter.viewHolder> {
 
     ArrayList<SQL_DB_Model> dataHolder;
-    public int adapterPosition;
+  //  public int adapterPosition;
 
     public Customer_Cart_Adapter(ArrayList<SQL_DB_Model> dataHolder) {
         this.dataHolder = dataHolder;
@@ -38,46 +42,17 @@ public class Customer_Cart_Adapter extends RecyclerView.Adapter<Customer_Cart_Ad
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
+        int id= Integer.parseInt(dataHolder.get(position).getId());
+        holder.itemView.setTag(id);
+
         holder.dishName.setText(dataHolder.get(position).getDishName());
         holder.dishPrice.setText("Price: Rs." + dataHolder.get(position).getPrice());
+        holder.dishQuantity.setText(dataHolder.get(position).getQuantity());
         Glide.with(holder.dishImage.getContext()).load(dataHolder.get(position).getImageURL()).into(holder.dishImage);
 
-        adapterPosition= position;
-
-        holder.cardView.setOnClickListener(v -> {
-                 holder.buttonLayout.setVisibility(View.VISIBLE);
-        });
-
-        holder.btn_plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int q= Integer.parseInt(holder.Quantity.getText().toString());
-                q = q + 1;
-                holder.Quantity.setText(String.valueOf(q));
-            }
-        });
-
-        holder.btn_minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(Integer.parseInt(holder.Quantity.getText().toString()) !=1 ){
-                    int q= Integer.parseInt(holder.Quantity.getText().toString());
-                    q = q - 1;
-                    holder.Quantity.setText(String.valueOf(q));
-                }
-            }
-        });
-
-        holder.btn_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(position !=1){
-                    removeAt(adapterPosition-1);
-                }
-            }
-        });
-
+ //       adapterPosition= position;
     }
+
 
     @Override
     public int getItemCount() {
@@ -85,31 +60,25 @@ public class Customer_Cart_Adapter extends RecyclerView.Adapter<Customer_Cart_Ad
     }
 
     class viewHolder extends RecyclerView.ViewHolder{
-        TextView dishName, dishPrice, Quantity;
+        TextView dishName, dishPrice, dishQuantity;
         ImageView dishImage;
-        ImageButton btn_plus, btn_minus, btn_delete;
         CardView cardView;
-        LinearLayout buttonLayout;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
 
             dishName= itemView.findViewById(R.id.dishName);
             dishPrice= itemView.findViewById(R.id.dishPrice);
-            Quantity= itemView.findViewById(R.id.Quantity);
+            dishQuantity= itemView.findViewById(R.id.DishQuantity);
             dishImage= itemView.findViewById(R.id.dishImage);
             cardView= itemView.findViewById(R.id.cart_order_cardView);
-            buttonLayout= itemView.findViewById(R.id.cart_update_buttons);
 
-            btn_plus= itemView.findViewById(R.id.btn_plus);
-            btn_minus= itemView.findViewById(R.id.btn_minus);
-            btn_delete= itemView.findViewById(R.id.btn_delete);
         }
     }
 
-    private void removeAt(int position) {
-        dataHolder.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, dataHolder.size());
-    }
+//    private void removeAt(int position) {
+//        dataHolder.remove(position);
+//        notifyItemRemoved(position);
+//        notifyItemRangeChanged(position, dataHolder.size());
+//    }
 }

@@ -1,4 +1,4 @@
-package com.example.foodapp.chefFoodPanel;
+package com.example.foodapp.AdminFoodPanel;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,7 +10,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,10 +21,6 @@ import android.widget.Toast;
 
 import com.example.foodapp.R;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -34,15 +29,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.UUID;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-public class Chef_Post_Dish extends AppCompatActivity {
+public class Admin_Post_Dish extends AppCompatActivity {
 
     ImageButton imageButton;
     Button post_dish;
@@ -63,7 +56,7 @@ public class Chef_Post_Dish extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.example.foodapp.R.layout.activity_chef__post__dish);
+        setContentView(com.example.foodapp.R.layout.activity_admin__post__dish);
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -112,7 +105,7 @@ public class Chef_Post_Dish extends AppCompatActivity {
     private void uploadImage() {
 
         if(imageuri != null){
-            final ProgressDialog progressDialog = new ProgressDialog(Chef_Post_Dish.this);
+            final ProgressDialog progressDialog = new ProgressDialog(Admin_Post_Dish.this);
             progressDialog.setTitle("Uploading.....");
             progressDialog.show();
             RandomUID = UUID.randomUUID().toString();
@@ -125,7 +118,7 @@ public class Chef_Post_Dish extends AppCompatActivity {
                         .setValue(info).addOnCompleteListener(task -> {
 
                             progressDialog.dismiss();
-                            Toast.makeText(Chef_Post_Dish.this,"Dish Posted Successfully!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Admin_Post_Dish.this,"Dish Posted Successfully!",Toast.LENGTH_SHORT).show();
                             imageButton.setBackgroundResource(R.drawable.ic_camera_24);
                             dishN.getEditText().getText().clear();
                             desc.getEditText().getText().clear();
@@ -135,7 +128,7 @@ public class Chef_Post_Dish extends AppCompatActivity {
 
             })).addOnFailureListener(e -> {
                 progressDialog.dismiss();
-                Toast.makeText(Chef_Post_Dish.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(Admin_Post_Dish.this,e.getMessage(),Toast.LENGTH_SHORT).show();
             }).addOnProgressListener(taskSnapshot -> {
                 double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
                 progressDialog.setMessage("Uploaded "+(int) progress+"%");

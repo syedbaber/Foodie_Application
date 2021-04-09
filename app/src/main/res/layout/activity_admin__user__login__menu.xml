@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Chef_User_Login_Menu"
+    tools:context=".Admin_User_Login_Menu"
     android:background="@drawable/background_img">
 
     <LinearLayout
@@ -31,7 +31,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="80dp"
             android:background="#E91E63"
-            android:text="Login As Chef"
+            android:text="Login As Admin"
             app:backgroundTint="#E91E63" />
 
         <Button

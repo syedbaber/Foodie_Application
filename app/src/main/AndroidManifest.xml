@@ -4,28 +4,28 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/foodie_icon"
         android:label="Foodie"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/foodie_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodApp">
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
-            android:name=".chefFoodPanel.Chef_Post_Dish"
+            android:name=".AdminFoodPanel.Admin_Post_Dish"
             android:label="Post Dish" />
-        <activity android:name=".Chef_Home" />
+        <activity android:name=".Admin_Home" />
         <activity
-            android:name=".Chef_User_Login_Menu"
+            android:name=".Admin_User_Login_Menu"
             android:label="Login Options" />
         <activity
-            android:name=".Chef_Login"
+            android:name=".Admin_Login"
             android:label="Chef Login" />
         <activity
-            android:name=".Chef_Registration"
+            android:name=".Admin_Registration"
             android:label="Chef Registration" />
-        <activity android:name=".Chef_User_SignUp_Menu" />
+        <activity android:name=".Admin_User_SignUp_Menu" />
         <activity
             android:name=".User_Login"
             android:label="User Login" />
