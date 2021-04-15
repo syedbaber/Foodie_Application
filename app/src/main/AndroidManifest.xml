@@ -9,6 +9,11 @@
         android:roundIcon="@mipmap/foodie_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodApp">
+        <service
+            android:name=".AdminFoodPanel.Service.ListenOrder"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

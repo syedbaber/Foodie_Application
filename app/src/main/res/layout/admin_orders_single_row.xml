@@ -26,8 +26,18 @@
             android:text="#12645758"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:padding="15dp"
+            android:padding="10dp"
             android:textSize="20sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/customerName"
+            android:text="Customer Name"
+            android:textColor="#1F46D5"
+            android:layout_marginLeft="15dp"
+            android:textStyle="italic"
+            android:padding="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -41,13 +51,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/order_Address"
-            android:text="Street 10, I-10/4 Islamabad"
+            android:text="Delivery Address"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/foodPandaColor"
             android:padding="2dp"
             android:layout_marginLeft="10dp"
             />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_editStatus"
+                android:text="Status"
+                android:padding="0dp"
+                android:layout_marginRight="10dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_deleteOrder"
+                android:text="Delete"
+                android:padding="0dp"/>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

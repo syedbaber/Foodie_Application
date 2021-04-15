@@ -43,6 +43,7 @@
             android:layout_marginTop="30dp"
             android:ems="10"
             android:hint="Email ID"
+            android:text="chef@gmail.com"
             android:inputType="textEmailAddress" />
 
         <EditText
@@ -52,6 +53,7 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="Password"
+            android:text="111111"
             android:inputType="textPassword" />
 
         <Button
