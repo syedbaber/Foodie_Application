@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.Model.Request_Order_Model;
 import com.example.foodapp.R;
+import com.example.foodapp.customerFoodPanel.Customer_Dish_Details_Fragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +57,17 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
             }
         });
 
+        myViewHolder.btn_Order_Details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String key= getRef(position).getKey();
+                AppCompatActivity activity=(AppCompatActivity)v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Admin_Order_Food_Details_Fragment(key)).addToBackStack(null).commit();
+
+            }
+        });
+
 
     }
 
@@ -70,7 +83,7 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
 
     public class myViewHolder extends RecyclerView.ViewHolder {
         TextView order_ID, order_Status, order_Address, customerName;
-        Button btn_editStatus, btn_deleteOrder;
+        Button btn_editStatus, btn_deleteOrder, btn_Order_Details;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,6 +93,7 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
             customerName= itemView.findViewById(R.id.customerName);
             btn_editStatus= itemView.findViewById(R.id.btn_editStatus);
             btn_deleteOrder= itemView.findViewById(R.id.btn_deleteOrder);
+            btn_Order_Details= itemView.findViewById(R.id.btn_orderDetials);
         }
     }
 

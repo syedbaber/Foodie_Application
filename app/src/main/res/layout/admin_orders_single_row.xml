@@ -76,8 +76,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_deleteOrder"
-                android:text="Delete"
-                android:padding="0dp"/>
+                android:text="Remove"
+                android:padding="0dp"
+                android:layout_marginRight="10dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_orderDetials"
+                android:text="Details"
+                android:padding="0dp"
+                android:layout_marginRight="10dp"/>
 
         </LinearLayout>
 

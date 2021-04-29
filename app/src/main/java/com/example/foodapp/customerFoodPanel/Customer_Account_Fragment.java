@@ -45,8 +45,6 @@ public class Customer_Account_Fragment extends Fragment {
         String UID= FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference uidReference= FirebaseDatabase.getInstance().getReference().child("User").child(UID);
 
-        Toast.makeText(getContext(), UID, Toast.LENGTH_SHORT).show();
-
         uidReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

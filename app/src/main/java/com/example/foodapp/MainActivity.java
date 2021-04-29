@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+//import com.example.foodapp.AdminFoodPanel.Service.ListenOrder;
+
 public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
@@ -32,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
                 textView.animate().alpha(1f).setDuration(800);
             }
         });
+
+        //Service Registering
+//        getActivity().startService(new Intent(getActivity(), ListenOrder.class));
+//        Intent service= new Intent(getBaseContext(),ListenOrder.class);
+//        startService(service);
 
         new Handler().postDelayed(new Runnable() {
             @Override

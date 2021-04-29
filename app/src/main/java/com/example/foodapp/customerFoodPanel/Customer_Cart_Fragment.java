@@ -96,8 +96,14 @@ public class Customer_Cart_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //Get address through Alter Dialog
-                showAlertDialog();
+                if(total == 0){
+                    Toast.makeText(getContext(), "Please Add Some Food to Cart", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //Get address through Alter Dialog
+                    showAlertDialog();
+
+                }
             }
 
 
@@ -110,10 +116,8 @@ public class Customer_Cart_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String result= new DB_Manager(getContext()).DeleteTable();
-                Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
-
-
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Customer_Home_Fragment()).commit();
+          //      Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Customer_Cart_Fragment()).commit();
             }
         });
 
@@ -176,18 +180,19 @@ public class Customer_Cart_Fragment extends Fragment {
                         edtAdress.getText().toString(),
                         dataHolder);
 
-                if(total == 0){
-                    Toast.makeText(getContext(), "Please Add Some Food to Cart", Toast.LENGTH_SHORT).show();
-                }
-                else {
+
                     //Submit to Firebase
                     request.child(String.valueOf(System.currentTimeMillis())).setValue(request_order_model);
+
+                //Refresh Fragment to clear the cart.
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Customer_Cart_Fragment()).commit();
 
                     Toast.makeText(getContext(), "Order Placed Successfully...", Toast.LENGTH_SHORT).show();
 
                     //Clear Cart
                     new DB_Manager(getContext()).DeleteTable();
-                }
+
+
             }
         });
 
