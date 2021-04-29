@@ -13,5 +13,7 @@
     <string name="login_failed">"Login failed"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_admin__tracking__order">Map</string>
+    <string name="title_activity_admin__order__tracking">Map</string>
 
 </resources>
