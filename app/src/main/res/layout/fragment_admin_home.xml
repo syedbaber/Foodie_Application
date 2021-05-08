@@ -1,9 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:menu="@menu/customer_bottom_navigation">
+    tools:menu="@menu/customer_bottom_navigation"
+    android:background="#E4E4E4">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginTop="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/UserName"
+            android:text=""
+            android:textStyle="italic|bold"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="20sp"
+            android:textColor="@color/foodPandaColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="150dp">
+
+
+        <LinearLayout
+            android:layout_width="143dp"
+            android:layout_height="180dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_shape"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:elevation="10dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                app:srcCompat="@drawable/ic_orders_pink"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active Orders"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Orders_Count"
+                android:text=""
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:textColor="@color/foodPandaColor"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="143dp"
+            android:layout_height="180dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_shape"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:elevation="10dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                app:srcCompat="@drawable/ic_dish_icon"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available Dishes"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Dishes_Count"
+                android:text=""
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:textColor="@color/foodPandaColor"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/round_corners">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_postDish"
+            android:layout_gravity="center"
+            android:background="@drawable/button_shape"
+            android:drawableTop="@drawable/ic_dish_icon"
+            android:elevation="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="Post Dish"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            app:backgroundTint="#EDEDED" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_add_Admin"
+            android:layout_gravity="center"
+            android:background="@drawable/button_shape"
+            android:drawableTop="@drawable/ic_person_pink"
+            android:elevation="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="Add User"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            app:backgroundTint="#EDEDED" />
+    </LinearLayout>
+
 
 </RelativeLayout>

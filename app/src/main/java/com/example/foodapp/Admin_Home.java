@@ -10,8 +10,8 @@ import android.view.MenuItem;
 
 import com.example.foodapp.AdminFoodPanel.Admin_Home_Fragment;
 import com.example.foodapp.AdminFoodPanel.Admin_Orders_Fragment;
-import com.example.foodapp.AdminFoodPanel.Admin_PendingOrders_Fragment;
 import com.example.foodapp.AdminFoodPanel.Admin_Profile_Fragment;
+import com.example.foodapp.AdminFoodPanel.Dishes_Corner_Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Admin_Home extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -29,6 +29,9 @@ public class Admin_Home extends AppCompatActivity implements BottomNavigationVie
 
         navigationView=findViewById(R.id.chef_bottom_navigation);
         navigationView.setOnNavigationItemSelectedListener(this);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Admin_Home_Fragment()).commit();
+
     }
 
     @Override
@@ -37,15 +40,16 @@ public class Admin_Home extends AppCompatActivity implements BottomNavigationVie
             case R.id.chefHome:
                 fragment= new Admin_Home_Fragment();
                 break;
-            case R.id.pendingOrders:
-                fragment= new Admin_PendingOrders_Fragment();
-                break;
 
             case R.id.orders:
                 fragment= new Admin_Orders_Fragment();
                 break;
 
-            case R.id.chefProfile:
+            case R.id.postDish:
+                fragment= new Dishes_Corner_Fragment();
+                break;
+
+            case R.id.adminProfile:
                 fragment= new Admin_Profile_Fragment();
                 break;
         }

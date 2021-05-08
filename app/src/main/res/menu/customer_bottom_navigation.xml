@@ -17,8 +17,8 @@
         android:title="Orders"/>
 
     <item
-        android:id="@+id/customerAccount"
+        android:id="@+id/customerProfile"
         android:icon="@drawable/ic_person_24"
-        android:title="Account"/>
+        android:title="Profile"/>
 
 </menu>

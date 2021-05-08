@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import com.example.foodapp.customerFoodPanel.Customer_Account_Fragment;
+import com.example.foodapp.customerFoodPanel.Customer_Profile_Fragment;
 import com.example.foodapp.customerFoodPanel.Customer_Cart_Fragment;
 import com.example.foodapp.customerFoodPanel.Customer_Home_Fragment;
 import com.example.foodapp.customerFoodPanel.Customer_Orders_Fragment;
@@ -50,8 +50,8 @@ public class User_Home extends AppCompatActivity implements BottomNavigationView
                 fragment= new Customer_Orders_Fragment();
                 break;
 
-            case R.id.customerAccount:
-                fragment= new Customer_Account_Fragment();
+            case R.id.customerProfile:
+                fragment= new Customer_Profile_Fragment();
                 break;
         }
         return loadCustomerFragment(fragment);

@@ -36,7 +36,7 @@
             android:layout_marginTop="30dp"
             android:ems="10"
             android:hint="Email ID"
-            android:text="chef@gmail.com"
+            android:text="admin@gmail.com"
             android:inputType="textEmailAddress" />
 
         <EditText

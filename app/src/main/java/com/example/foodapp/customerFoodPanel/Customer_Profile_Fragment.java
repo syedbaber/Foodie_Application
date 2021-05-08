@@ -22,7 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Customer_Account_Fragment extends Fragment {
+public class Customer_Profile_Fragment extends Fragment {
 
     TextView Name, Email, Phone;
     Button Logout;

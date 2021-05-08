@@ -6,15 +6,16 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Home"/>
     <item
-        android:id="@+id/pendingOrders"
-        android:icon="@drawable/ic_pending_order_24"
-        android:title="Pending Orders"/>
-    <item
         android:id="@+id/orders"
         android:icon="@drawable/ic_orders_24"
         android:title="Orders"/>
     <item
-        android:id="@+id/chefProfile"
+        android:id="@+id/postDish"
         android:icon="@drawable/ic_post_dish_24"
         android:title="Post Dish"/>
+
+    <item
+        android:id="@+id/adminProfile"
+        android:icon="@drawable/ic_person_24"
+        android:title="Profile"/>
 </menu>

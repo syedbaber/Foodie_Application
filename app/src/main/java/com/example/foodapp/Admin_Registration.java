@@ -52,22 +52,22 @@ public class Admin_Registration extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                String UserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                reference = FirebaseDatabase.getInstance().getReference("Admin").child(UserId);
-
-
-
-                //Get all the values
-                String First_name= txt_fname.getEditText().getText().toString();
-                String Last_name= txt_lname.getEditText().getText().toString();
-                String Email= txt_email.getEditText().getText().toString();
-                String Pwd= txt_password.getEditText().getText().toString();
-                String confPwd= txt_confpassword.getEditText().getText().toString();
-                String Phone= txt_phone.getEditText().getText().toString();
-
-                UserHelperClass helperClass= new UserHelperClass(First_name,Last_name,Email,Pwd,confPwd,Phone);
-
-                reference.setValue(helperClass);
+//                String UserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//                reference = FirebaseDatabase.getInstance().getReference("Admin").child(UserId);
+//
+//
+//
+//                //Get all the values
+//                String First_name= txt_fname.getEditText().getText().toString();
+//                String Last_name= txt_lname.getEditText().getText().toString();
+//                String Email= txt_email.getEditText().getText().toString();
+//                String Pwd= txt_password.getEditText().getText().toString();
+//                String confPwd= txt_confpassword.getEditText().getText().toString();
+//                String Phone= txt_phone.getEditText().getText().toString();
+//
+//                UserHelperClass helperClass= new UserHelperClass(First_name,Last_name,Email,Pwd,confPwd,Phone);
+//
+//                reference.setValue(helperClass);
 
                 Register();  //Registering Email for Authentication
 
@@ -114,6 +114,27 @@ public class Admin_Registration extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+
+                    //--------------Adding data to firebase------//
+
+                    String UserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    reference = FirebaseDatabase.getInstance().getReference("Admin").child(UserId);
+
+                    //Get all the values
+                    String First_name= txt_fname.getEditText().getText().toString();
+                    String Last_name= txt_lname.getEditText().getText().toString();
+                    String Email= txt_email.getEditText().getText().toString();
+                    String Pwd= txt_password.getEditText().getText().toString();
+                    String confPwd= txt_confpassword.getEditText().getText().toString();
+                    String Phone= txt_phone.getEditText().getText().toString();
+
+                    UserHelperClass helperClass= new UserHelperClass(First_name,Last_name,Email,Pwd,confPwd,Phone);
+
+                    reference.setValue(helperClass);
+
+                    //------------------------------------------//
+
+
                     Toast.makeText(Admin_Registration.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
                     Intent intent= new Intent(Admin_Registration.this, Admin_Home.class);
                     startActivity(intent);

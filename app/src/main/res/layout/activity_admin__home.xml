@@ -26,7 +26,7 @@
         android:backgroundTint="@color/white"
         app:itemTextColor="@color/menu_item_color"
         app:itemIconTint="@color/menu_item_color"
-        app:menu="@menu/chef_bottom_navigation"
+        app:menu="@menu/admin_bottom_navigation"
         android:layout_margin="10dp"/>
 
 
