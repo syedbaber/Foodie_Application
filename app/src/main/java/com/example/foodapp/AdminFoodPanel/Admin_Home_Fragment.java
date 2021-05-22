@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Admin_Home_Fragment extends Fragment {
 
-    Button btn_PostDish, btn_AddUser;
+    Button btn_PostDish, btn_AddUser, btn_AddRider;
     TextView ordersCount, dishesCount, userName;
 
     @Nullable
@@ -35,6 +35,7 @@ public class Admin_Home_Fragment extends Fragment {
 
         btn_PostDish= view.findViewById(R.id.btn_postDish);
         btn_AddUser= view.findViewById(R.id.btn_add_Admin);
+        btn_AddRider=view.findViewById(R.id.btn_add_Rider);
         ordersCount= view.findViewById(R.id.Orders_Count);
         dishesCount= view.findViewById(R.id.Dishes_Count);
         userName= view.findViewById(R.id.UserName);
@@ -51,6 +52,14 @@ public class Admin_Home_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(view.getContext(), Admin_Registration.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_AddRider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getContext(), Rider_Registration.class);
                 startActivity(intent);
             }
         });

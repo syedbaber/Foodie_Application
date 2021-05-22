@@ -71,10 +71,13 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
         myViewHolder.btn_OrderLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppCompatActivity activity=(AppCompatActivity)v.getContext();
-               // activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Admin_Order_Tracking).addToBackStack(null).commit();
+              String  clientAddress= request_order_model.getAddress(); //For sending to Admin_Track_Order class.
 
+                AppCompatActivity activity=(AppCompatActivity)v.getContext();
                 Intent intent= new Intent(v.getContext(), Admin_Order_Tracking.class);
+
+                intent.putExtra("clientAddress", clientAddress);
+
                 activity.startActivity(intent);
             }
         });

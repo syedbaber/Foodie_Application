@@ -1,4 +1,4 @@
-package com.example.foodapp;
+package com.example.foodapp.AdminFoodPanel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.foodapp.Admin_Home;
+import com.example.foodapp.Admin_Registration;
+import com.example.foodapp.R;
+import com.example.foodapp.UserHelperClass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -20,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Admin_Registration extends AppCompatActivity {
+public class Rider_Registration extends AppCompatActivity {
 
     private TextInputLayout txt_fname, txt_lname, txt_email, txt_password, txt_confpassword, txt_phone;
     private Button btn_register;
@@ -32,7 +36,7 @@ public class Admin_Registration extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin__registration);
+        setContentView(R.layout.activity_rider__registration);
 
         firebaseAuth=firebaseAuth.getInstance();
 
@@ -98,7 +102,7 @@ public class Admin_Registration extends AppCompatActivity {
                     //--------------Adding data to firebase------//
 
                     String UserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    reference = FirebaseDatabase.getInstance().getReference("Admin").child(UserId);
+                    reference = FirebaseDatabase.getInstance().getReference("Rider").child(UserId);
 
                     //Get all the values
                     String First_name= txt_fname.getEditText().getText().toString();
@@ -115,13 +119,11 @@ public class Admin_Registration extends AppCompatActivity {
                     //------------------------------------------//
 
 
-                    Toast.makeText(Admin_Registration.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
-                    Intent intent= new Intent(Admin_Registration.this, Admin_Home.class);
-                    startActivity(intent);
+                    Toast.makeText(Rider_Registration.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 else {
-                    Toast.makeText(Admin_Registration.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Rider_Registration.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                 }
                 progressDialog.dismiss();
             }
