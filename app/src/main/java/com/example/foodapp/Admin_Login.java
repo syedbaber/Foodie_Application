@@ -23,7 +23,6 @@ public class Admin_Login extends AppCompatActivity {
     private EditText emailId;
     private EditText password;
     private Button login;
-    private TextView signUp;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
 
@@ -36,7 +35,6 @@ public class Admin_Login extends AppCompatActivity {
         emailId=(EditText)findViewById(R.id.email_Login);
         password=(EditText)findViewById(R.id.password_Login);
         login= (Button)findViewById(R.id.btn_login);
-        signUp= (TextView) findViewById(R.id.SignupTV);
         progressDialog= new ProgressDialog(this);
 
         login.setOnClickListener(new View.OnClickListener() {
