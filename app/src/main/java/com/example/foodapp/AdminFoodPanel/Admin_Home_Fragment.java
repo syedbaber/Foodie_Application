@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.foodapp.Admin_Registration;
@@ -24,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Admin_Home_Fragment extends Fragment {
 
-    Button btn_PostDish, btn_AddUser, btn_AddRider;
+    Button btn_PostDish, btn_AddUser, btn_AddRider, btn_deleteDish;
     TextView ordersCount, dishesCount, userName;
 
     @Nullable
@@ -34,6 +35,7 @@ public class Admin_Home_Fragment extends Fragment {
         getActivity().setTitle("Home");
 
         btn_PostDish= view.findViewById(R.id.btn_postDish);
+        btn_deleteDish=view.findViewById(R.id.btn_deleteDish);
         btn_AddUser= view.findViewById(R.id.btn_add_Admin);
         btn_AddRider=view.findViewById(R.id.btn_add_Rider);
         ordersCount= view.findViewById(R.id.Orders_Count);
@@ -45,6 +47,15 @@ public class Admin_Home_Fragment extends Fragment {
             public void onClick(View v) {
                 Intent intent= new Intent(view.getContext(), Admin_Post_Dish.class);
                 startActivity(intent);
+            }
+        });
+
+        btn_deleteDish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity=(AppCompatActivity)v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Dishes_List_Fragment()).addToBackStack(null).commit();
+
             }
         });
 

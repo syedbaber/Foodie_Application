@@ -118,54 +118,84 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="400dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="400dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/round_corners">
+        android:background="@drawable/round_corners"
+        android:orientation="vertical">
 
-        <Button
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_postDish"
-            android:layout_gravity="center"
-            android:background="@drawable/button_shape"
-            android:drawableTop="@drawable/ic_dish_icon"
-            android:elevation="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="Post Dish"
-            android:textSize="10sp"
-            android:textColor="@color/black"
-            app:backgroundTint="#EDEDED" />
+            android:orientation="horizontal">
 
-        <Button
+            <Button
+                android:id="@+id/btn_postDish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_shape"
+                android:drawableTop="@drawable/ic_dish_icon"
+                android:elevation="10dp"
+                android:text="Post Dish"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:backgroundTint="#EDEDED" />
+
+            <Button
+                android:id="@+id/btn_deleteDish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_shape"
+                android:drawableTop="@drawable/ic_dish_icon"
+                android:elevation="10dp"
+                android:text="Delete Dish"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:backgroundTint="#EDEDED" />
+
+            <Button
+                android:id="@+id/btn_add_Admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_shape"
+                android:drawableTop="@drawable/ic_person_pink"
+                android:elevation="10dp"
+                android:text="Add User"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:backgroundTint="#EDEDED" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_add_Admin"
-            android:layout_gravity="center"
-            android:background="@drawable/button_shape"
-            android:drawableTop="@drawable/ic_person_pink"
-            android:elevation="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="Add User"
-            android:textSize="10sp"
-            android:textColor="@color/black"
-            app:backgroundTint="#EDEDED" />
+            android:orientation="horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_add_Rider"
-            android:layout_gravity="center"
-            android:background="@drawable/button_shape"
-            android:drawableTop="@drawable/ic_rider"
-            android:elevation="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="Add Rider"
-            android:textSize="10sp"
-            android:textColor="@color/black"
-            app:backgroundTint="#EDEDED" />
+            <Button
+                android:id="@+id/btn_add_Rider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_shape"
+                android:drawableTop="@drawable/ic_rider"
+                android:elevation="10dp"
+                android:text="Add Rider"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:backgroundTint="#EDEDED" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
 
