@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.foodapp.Admin_Home;
 import com.example.foodapp.Admin_Registration;
+import com.example.foodapp.Model.Rider_Registration_Model;
 import com.example.foodapp.R;
 import com.example.foodapp.UserHelperClass;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -102,7 +103,7 @@ public class Rider_Registration extends AppCompatActivity {
                     //--------------Adding data to firebase------//
 
                     String UserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    reference = FirebaseDatabase.getInstance().getReference("Rider").child(UserId);
+                    reference = FirebaseDatabase.getInstance().getReference("Riders").child(UserId);
 
                     //Get all the values
                     String First_name= txt_fname.getEditText().getText().toString();
@@ -111,10 +112,11 @@ public class Rider_Registration extends AppCompatActivity {
                     String Pwd= txt_password.getEditText().getText().toString();
                     String confPwd= txt_confpassword.getEditText().getText().toString();
                     String Phone= txt_phone.getEditText().getText().toString();
+                    String status="0";
 
-                    UserHelperClass helperClass= new UserHelperClass(First_name,Last_name,Email,Pwd,confPwd,Phone);
+                    Rider_Registration_Model rider_registration_model= new Rider_Registration_Model(First_name,Last_name,Email,Pwd,confPwd,Phone,status);
 
-                    reference.setValue(helperClass);
+                    reference.setValue(rider_registration_model);
 
                     //------------------------------------------//
 

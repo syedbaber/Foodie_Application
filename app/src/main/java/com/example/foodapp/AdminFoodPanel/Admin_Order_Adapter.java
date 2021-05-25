@@ -50,6 +50,15 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
             }
         });
 
+        myViewHolder.btn_deliverOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity=(AppCompatActivity)v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Riders_List()).addToBackStack(null).commit();
+
+            }
+        });
+
         myViewHolder.btn_deleteOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +106,7 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
 
     public class myViewHolder extends RecyclerView.ViewHolder {
         TextView order_ID, order_Status, order_Address, customerName;
-        Button btn_editStatus, btn_deleteOrder, btn_Order_Details, btn_OrderLocation;
+        Button btn_editStatus, btn_deleteOrder, btn_Order_Details, btn_OrderLocation, btn_deliverOrder;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -109,6 +118,7 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
             btn_deleteOrder= itemView.findViewById(R.id.btn_deleteOrder);
             btn_Order_Details= itemView.findViewById(R.id.btn_orderDetials);
             btn_OrderLocation= itemView.findViewById(R.id.btn_OrderLocation);
+            btn_deliverOrder= itemView.findViewById(R.id.btn_deliverOrder);
         }
     }
 

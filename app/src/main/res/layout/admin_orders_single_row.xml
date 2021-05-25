@@ -39,13 +39,36 @@
             android:textStyle="italic"
             android:padding="5dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/order_Status"
-            android:text="Order Status"
-            android:textColor="#FF0000"
-            android:layout_marginLeft="15dp"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/order_Status"
+                android:layout_marginRight="170dp"
+                android:text="Order Status"
+                android:textColor="#FF0000"
+                android:layout_marginLeft="15dp"/>
+
+            <Button
+                android:layout_width="65dp"
+                android:layout_height="30dp"
+                android:id="@+id/btn_editStatus"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black"
+                android:textAllCaps="false"
+                android:elevation="10dp"
+                android:text="Status"
+                android:padding="0dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"/>
+
+        </LinearLayout>
+
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,18 +88,20 @@
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="65dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_editStatus"
-                android:text="Status"
+                android:id="@+id/btn_deliverOrder"
+                android:background="@drawable/round_btn_shape"
+                android:text="Deliver"
+                android:textAllCaps="false"
                 android:padding="0dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginRight="20dp"/>
 
             <Button
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_deleteOrder"
+                android:textAllCaps="false"
                 android:text="Remove"
                 android:padding="0dp"
                 android:layout_marginRight="20dp"/>
@@ -85,6 +110,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_orderDetials"
+                android:textAllCaps="false"
                 android:text="Details"
                 android:padding="0dp"
                 android:layout_marginRight="20dp"/>
@@ -93,6 +119,7 @@
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_OrderLocation"
+                android:textAllCaps="false"
                 android:text="Location"
                 android:padding="0dp"
                 android:layout_marginRight="10dp"/>
