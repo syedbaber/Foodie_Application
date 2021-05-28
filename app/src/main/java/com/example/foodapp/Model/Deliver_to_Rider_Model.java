@@ -4,6 +4,7 @@ public class Deliver_to_Rider_Model {
     private String orderID;
     private String Rider_ID;
     private String Customer_Name;
+    private String Status;
 
     public Deliver_to_Rider_Model() { }
 
@@ -12,6 +13,7 @@ public class Deliver_to_Rider_Model {
         this.orderID = orderID;
         Rider_ID = rider_ID;
         Customer_Name = customer_Name;
+        this.Status="0";    // 0 for pending order, 1 for order completed;
     }
 
     public String getOrderID() {
@@ -36,5 +38,13 @@ public class Deliver_to_Rider_Model {
 
     public void setCustomer_Name(String customer_Name) {
         Customer_Name = customer_Name;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 }
