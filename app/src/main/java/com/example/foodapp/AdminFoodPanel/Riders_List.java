@@ -25,12 +25,15 @@ public class Riders_List extends Fragment {
     RecyclerView recyclerView;
     Riders_List_Adapter adapter;
     String Order_ID;
+    String Customer_Name;
     TextView order_Key;
 
     public Riders_List (){}
 
-    public Riders_List(String order_ID){
+    public Riders_List(String order_ID, String Customer_name){
+
         this.Order_ID= order_ID;
+        this.Customer_Name= Customer_name;
     }
 
 
@@ -56,7 +59,7 @@ public class Riders_List extends Fragment {
                         .setQuery(query1, Rider_Registration_Model.class)
                         .build();
 
-        adapter= new Riders_List_Adapter(options, Order_ID);
+        adapter= new Riders_List_Adapter(options, Order_ID, Customer_Name);
         recyclerView.setAdapter(adapter);
 
         return view;

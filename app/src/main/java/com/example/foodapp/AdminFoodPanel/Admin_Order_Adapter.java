@@ -29,7 +29,7 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
 
     MaterialSpinner spinner;
     DatabaseReference dbReference= FirebaseDatabase.getInstance().getReference().child("Order_Requests");
-    String key;
+    String key, Customer_Name;
 
     public Admin_Order_Adapter(@NonNull FirebaseRecyclerOptions<Request_Order_Model> options) {
         super(options);
@@ -59,9 +59,12 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
         myViewHolder.btn_deliverOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Getting orderID and Customer name to pass to another fragment.
                 key= getRef(position).getKey();
+                Customer_Name= myViewHolder.customerName.getText().toString();
+
                 AppCompatActivity activity=(AppCompatActivity)v.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Riders_List(key)).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Riders_List(key,Customer_Name)).addToBackStack(null).commit();
 
             }
         });

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,11 +24,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Riders_List_Adapter extends FirebaseRecyclerAdapter<Rider_Registration_Model, Riders_List_Adapter.myViewHolder> {
-    String Order_id;
+    String Order_id, customer_Name;
 
-    public Riders_List_Adapter(@NonNull FirebaseRecyclerOptions<Rider_Registration_Model> options, String order_id) {
+    public Riders_List_Adapter(@NonNull FirebaseRecyclerOptions<Rider_Registration_Model> options, String order_id, String Customer_Name) {
         super(options);
         Order_id = order_id;
+        customer_Name=Customer_Name;
     }
 
     public Riders_List_Adapter(@NonNull FirebaseRecyclerOptions<Rider_Registration_Model> options, Riders_List riders_list) {
@@ -54,10 +56,10 @@ public class Riders_List_Adapter extends FirebaseRecyclerAdapter<Rider_Registrat
                 String Rider_ID= getRef(i).getKey();
 
                 //Adding values to store in firebase
-                Deliver_to_Rider_Model deliver_to_rider_model= new Deliver_to_Rider_Model(Order_id,Rider_ID);
+                Deliver_to_Rider_Model deliver_to_rider_model= new Deliver_to_Rider_Model(Order_id,Rider_ID, customer_Name);
 
                 DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("order_Delivery");
-                databaseReference.setValue(deliver_to_rider_model);
+                databaseReference.child(Order_id).setValue(deliver_to_rider_model);
 
                 //Changing status of Rider from 'Idle' to 'Working'.
                 DatabaseReference databaseReference1= FirebaseDatabase.getInstance().getReference("Riders");
@@ -70,6 +72,11 @@ public class Riders_List_Adapter extends FirebaseRecyclerAdapter<Rider_Registrat
                //Display Message
                 Snackbar.make(v, "Order Handover to Rider Successfully.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                //Go back to orders fragments
+                AppCompatActivity activity=(AppCompatActivity)v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Admin_Orders_Fragment()).addToBackStack(null).commit();
+
             }
         });
     }
