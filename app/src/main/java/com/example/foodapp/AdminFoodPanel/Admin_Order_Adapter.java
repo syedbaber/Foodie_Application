@@ -29,6 +29,7 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
 
     MaterialSpinner spinner;
     DatabaseReference dbReference= FirebaseDatabase.getInstance().getReference().child("Order_Requests");
+    String key;
 
     public Admin_Order_Adapter(@NonNull FirebaseRecyclerOptions<Request_Order_Model> options) {
         super(options);
@@ -40,6 +41,11 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
         myViewHolder.order_Status.setText(convertCodeToStatus(request_order_model.getStatus()));
         myViewHolder.order_Address.setText(request_order_model.getAddress());
         myViewHolder.customerName.setText(request_order_model.getName());
+
+        //Showing Delivery Button
+        if(myViewHolder.order_Status.getText() == "Order placed."){
+            myViewHolder.btn_deliverOrder.setVisibility(View.VISIBLE);
+        }
 
 
         myViewHolder.btn_editStatus.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +59,9 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
         myViewHolder.btn_deliverOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                key= getRef(position).getKey();
                 AppCompatActivity activity=(AppCompatActivity)v.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Riders_List()).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Riders_List(key)).addToBackStack(null).commit();
 
             }
         });
@@ -70,7 +77,7 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
             @Override
             public void onClick(View v) {
 
-                String key= getRef(position).getKey();
+                key= getRef(position).getKey();
                 AppCompatActivity activity=(AppCompatActivity)v.getContext();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Admin_Order_Food_Details_Fragment(key)).addToBackStack(null).commit();
 

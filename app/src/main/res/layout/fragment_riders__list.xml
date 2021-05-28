@@ -15,7 +15,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Riders List"
+            android:id="@+id/order_idd"
+            android:text="Order ID"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available Riders' List"
             android:layout_gravity="center"
             android:textSize="25sp"
             android:textColor="@color/foodPandaColor"

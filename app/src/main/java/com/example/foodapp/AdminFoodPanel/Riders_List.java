@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.foodapp.Model.Request_Order_Model;
 import com.example.foodapp.Model.Rider_Registration_Model;
@@ -17,11 +18,20 @@ import com.example.foodapp.customerFoodPanel.DishDetailsModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class Riders_List extends Fragment {
 
     RecyclerView recyclerView;
     Riders_List_Adapter adapter;
+    String Order_ID;
+    TextView order_Key;
+
+    public Riders_List (){}
+
+    public Riders_List(String order_ID){
+        this.Order_ID= order_ID;
+    }
 
 
     @Override
@@ -30,18 +40,23 @@ public class Riders_List extends Fragment {
 
         View  view = inflater.inflate(R.layout.fragment_riders__list, container, false);
 
+        order_Key= view.findViewById(R.id.order_idd);
+        order_Key.setText(Order_ID);
+
         recyclerView= view.findViewById(R.id.Rec_RidersList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
        //Firebase
         DatabaseReference query= FirebaseDatabase.getInstance().getReference().child("Riders");
 
+        Query query1= FirebaseDatabase.getInstance().getReference("Riders").orderByChild("status").equalTo("0");
+
         FirebaseRecyclerOptions<Rider_Registration_Model> options =
                 new FirebaseRecyclerOptions.Builder<Rider_Registration_Model>()
-                        .setQuery(query, Rider_Registration_Model.class)
+                        .setQuery(query1, Rider_Registration_Model.class)
                         .build();
 
-        adapter= new Riders_List_Adapter(options);
+        adapter= new Riders_List_Adapter(options, Order_ID);
         recyclerView.setAdapter(adapter);
 
         return view;

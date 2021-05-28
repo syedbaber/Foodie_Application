@@ -90,16 +90,6 @@
             <Button
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_deliverOrder"
-                android:background="@drawable/round_btn_shape"
-                android:text="Deliver"
-                android:textAllCaps="false"
-                android:padding="0dp"
-                android:layout_marginRight="20dp"/>
-
-            <Button
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/btn_deleteOrder"
                 android:textAllCaps="false"
                 android:text="Remove"
@@ -110,6 +100,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_orderDetials"
+                android:backgroundTint="@color/colorPrimary"
                 android:textAllCaps="false"
                 android:text="Details"
                 android:padding="0dp"
@@ -119,10 +110,23 @@
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_OrderLocation"
+                android:backgroundTint="#DC1D0F"
                 android:textAllCaps="false"
                 android:text="Location"
                 android:padding="0dp"
                 android:layout_marginRight="10dp"/>
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_deliverOrder"
+                android:background="@drawable/round_btn_shape"
+                android:backgroundTint="#9C27B0"
+                android:text="Deliver"
+                android:textAllCaps="false"
+                android:padding="0dp"
+                android:layout_marginRight="20dp"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

@@ -6,20 +6,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodapp.Model.Deliver_to_Rider_Model;
 import com.example.foodapp.Model.Rider_Registration_Model;
 import com.example.foodapp.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Riders_List_Adapter extends FirebaseRecyclerAdapter<Rider_Registration_Model, Riders_List_Adapter.myViewHolder> {
+    String Order_id;
 
-    public Riders_List_Adapter(@NonNull FirebaseRecyclerOptions<Rider_Registration_Model> options) {
+    public Riders_List_Adapter(@NonNull FirebaseRecyclerOptions<Rider_Registration_Model> options, String order_id) {
         super(options);
+        Order_id = order_id;
+    }
+
+    public Riders_List_Adapter(@NonNull FirebaseRecyclerOptions<Rider_Registration_Model> options, Riders_List riders_list) {
+        super(options);
+
     }
 
     @Override
@@ -27,16 +40,36 @@ public class Riders_List_Adapter extends FirebaseRecyclerAdapter<Rider_Registrat
         myViewHolder.Rider_name.setText(rider_registration_model.getFname()+" "+ rider_registration_model.getLname());
         myViewHolder.Rider_status.setText(convertCodeToStatus(rider_registration_model.getStatus()));
 
-        if(myViewHolder.Rider_status.getText() == "Working"){
-            myViewHolder.Rider_status.setTextColor(Color.parseColor("#ff002b"));
-        }
 
         myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(myViewHolder.Rider_status.getText() == "Idle"){
                     myViewHolder.btn_DeliverToRider.setVisibility(View.VISIBLE);
-                }
+            }
+        });
+
+        myViewHolder.btn_DeliverToRider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String Rider_ID= getRef(i).getKey();
+
+                //Adding values to store in firebase
+                Deliver_to_Rider_Model deliver_to_rider_model= new Deliver_to_Rider_Model(Order_id,Rider_ID);
+
+                DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("order_Delivery");
+                databaseReference.setValue(deliver_to_rider_model);
+
+                //Changing status of Rider from 'Idle' to 'Working'.
+                DatabaseReference databaseReference1= FirebaseDatabase.getInstance().getReference("Riders");
+                databaseReference1.child(Rider_ID).child("status").setValue("1");
+
+                //Changing Order status from 'Order Placed' to 'On My Way'.
+                DatabaseReference databaseReference2= FirebaseDatabase.getInstance().getReference("Order_Requests");
+                databaseReference2.child(Order_id).child("status").setValue("1");
+
+               //Display Message
+                Snackbar.make(v, "Order Handover to Rider Successfully.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
     }
@@ -60,6 +93,7 @@ public class Riders_List_Adapter extends FirebaseRecyclerAdapter<Rider_Registrat
             Rider_status= itemView.findViewById(R.id.Rider_Status);
             cardView= itemView.findViewById(R.id.riderList_Cardview);
             btn_DeliverToRider= itemView.findViewById(R.id.btn_deliverToRider);
+
         }
     }
 
