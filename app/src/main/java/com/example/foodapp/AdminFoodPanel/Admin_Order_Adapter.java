@@ -46,6 +46,9 @@ public class Admin_Order_Adapter extends FirebaseRecyclerAdapter<Request_Order_M
         if(myViewHolder.order_Status.getText() == "Order placed."){
             myViewHolder.btn_deliverOrder.setVisibility(View.VISIBLE);
         }
+        else {
+            myViewHolder.btn_deliverOrder.setVisibility(View.GONE);
+        }
 
 
         myViewHolder.btn_editStatus.setOnClickListener(new View.OnClickListener() {
