@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Food App</string>
     <string name="home_title">Home</string>
-    <string name="foodi">Foodi</string>
+    <string name="foodie">Foodie</string>
     <string name="title_activity_user__login">User_Login</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

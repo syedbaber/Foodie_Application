@@ -13,12 +13,13 @@ public class Request_Order_Model {
     private String Total_price;
     private String status;
     private String address;
+    private String SelfPickup;
     private List<SQL_DB_Model> foods;
 
     public Request_Order_Model() {
     }
 
-    public Request_Order_Model(String name, String phone, String UID, String total_price, String address, List<SQL_DB_Model> foods) {
+    public Request_Order_Model(String name, String phone, String UID, String total_price, String address, String selfPickup, List<SQL_DB_Model> foods) {
         Name = name;
         Phone = phone;
         this.UID = UID;
@@ -26,6 +27,15 @@ public class Request_Order_Model {
         this.foods = foods;
         this.status="0";  // 0 : Placed Order,  1 : Order Shipping, 2 : Order Shipped..
         this.address= address;
+        this.SelfPickup=selfPickup;
+    }
+
+    public String getSelfPickup() {
+        return SelfPickup;
+    }
+
+    public void setSelfPickup(String selfPickup) {
+        SelfPickup = selfPickup;
     }
 
     public String getAddress() {

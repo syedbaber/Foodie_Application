@@ -32,10 +32,6 @@
             android:name=".AdminFoodPanel.Admin_Order_Tracking"
             android:label="@string/title_activity_admin__order__tracking" />
 
-        <service
-            android:name=".AdminFoodPanel.Service.ListenOrder"
-            android:enabled="true"
-            android:exported="true" />
 
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"

@@ -32,7 +32,7 @@ public class MainMenu extends AppCompatActivity {
         signin_Email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(getApplicationContext(), Admin_User_Login_Menu.class);
+                Intent intent= new Intent(getApplicationContext(), User_Login.class);
                 startActivity(intent);
             }
         });

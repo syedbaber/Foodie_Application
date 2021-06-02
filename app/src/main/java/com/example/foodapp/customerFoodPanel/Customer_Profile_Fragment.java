@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.foodapp.Admin_User_Login_Menu;
 import com.example.foodapp.R;
+import com.example.foodapp.User_Login;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -85,7 +86,7 @@ public class Customer_Profile_Fragment extends Fragment {
     private void LogoutFun() {
         FirebaseAuth.getInstance().signOut();
 
-        Intent intent= new Intent(getContext(), Admin_User_Login_Menu.class);
+        Intent intent= new Intent(getContext(), User_Login.class);
         startActivity(intent);
     }
 }

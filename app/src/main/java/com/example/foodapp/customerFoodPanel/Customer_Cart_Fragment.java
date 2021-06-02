@@ -2,6 +2,7 @@ package com.example.foodapp.customerFoodPanel;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -13,17 +14,24 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodapp.Model.Request_Order_Model;
 import com.example.foodapp.R;
+import com.example.foodapp.User_Home;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,10 +45,12 @@ import java.util.List;
 public class Customer_Cart_Fragment extends Fragment {
     RecyclerView recyclerView;
     TextView total_Price;
+    CheckBox deliveryCheckbox;
+    LinearLayout emptyCartLayout;
     Button deleteTable, btn_placeOrder;
     ArrayList<SQL_DB_Model> dataHolder;
     int total=0;
-    String userName, userPhone, UID;
+    String userName, userPhone, UID, selfPickup;
 
     FirebaseDatabase database;
     DatabaseReference request;
@@ -62,11 +72,17 @@ public class Customer_Cart_Fragment extends Fragment {
         deleteTable= view.findViewById(R.id.deleteTable);
         btn_placeOrder= view.findViewById(R.id.btn_placeOrder);
         total_Price= view.findViewById(R.id.total_Price);
+        emptyCartLayout= view.findViewById(R.id.emptyCart_Layout);
+        deliveryCheckbox= view.findViewById(R.id.Delivery_Checkbox);
+
 
         //Firebase
         database= FirebaseDatabase.getInstance();
-        request= database.getReference("Order_Requests");
         UID =  FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        //Define database path for Self Pick or Room Delivery
+
+        request= database.getReference("Order_Requests");
 
 
 
@@ -90,6 +106,12 @@ public class Customer_Cart_Fragment extends Fragment {
        //Calling User Info function
         userInfo();
 
+        //Showing Image and text to brows food if cart is empty
+        emptyCartFun(emptyCartLayout, total_Price);
+
+        //Checkbox Change Event
+        CheckBoxEventfun();
+
 
        //Place Order Button
         btn_placeOrder.setOnClickListener(new View.OnClickListener() {
@@ -100,14 +122,16 @@ public class Customer_Cart_Fragment extends Fragment {
                     Toast.makeText(getContext(), "Please Add Some Food to Cart", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    //Get address through Alter Dialog
-                    showAlertDialog();
-
+                    if(deliveryCheckbox.isChecked()){
+                        //Get address through Alter Dialog
+                        showAlertDialog();
+                    }
+                    else {
+                        //Submit Order for Self PickUp
+                       SelfPickUp_Order_Submit();
+                    }
                 }
             }
-
-
-
         });
 
 
@@ -121,13 +145,45 @@ public class Customer_Cart_Fragment extends Fragment {
             }
         });
 
-
+        emptyCartLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Customer_Home_Fragment()).commit();
+                Intent intent= new Intent(getContext(), User_Home.class);
+                startActivity(intent);
+            }
+        });
 
 
 
 
 
         return view;
+    }
+
+    private void CheckBoxEventfun() {
+        deliveryCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(deliveryCheckbox.isChecked()){
+                   int newTotal= Integer.parseInt(total_Price.getText().toString()) + 20;
+                   total_Price.setText(String.valueOf(newTotal));
+                }
+                else {
+                    int newTotal= Integer.parseInt(total_Price.getText().toString()) - 20;
+                    total_Price.setText(String.valueOf(newTotal));
+                }
+            }
+        });
+    }
+
+    private void emptyCartFun(LinearLayout emptyCartLayout, TextView total_price) {
+        if(total_price.getText().toString().equals("0")){
+            emptyCartLayout.setVisibility(View.VISIBLE);
+        }
+        else {
+            emptyCartLayout.setVisibility(View.GONE);
+        }
     }
 
     public void userInfo(){
@@ -170,29 +226,36 @@ public class Customer_Cart_Fragment extends Fragment {
         edtAdress.setLayoutParams(lp);
         alertDialog.setView(edtAdress);
 
+
         alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Request_Order_Model request_order_model= new Request_Order_Model(userName,
-                        userPhone,
-                        UID,
-                        total_Price.getText().toString(),
-                        edtAdress.getText().toString(),
-                        dataHolder);
+
+                //Check for empty address
+                if(edtAdress.getText().length() ==0){
+                    Toast.makeText(getContext(), "Please enter delivery address...", Toast.LENGTH_SHORT).show();
+                }
+                else if(edtAdress.getText().length() !=0) {
+                    Request_Order_Model request_order_model= new Request_Order_Model(userName,
+                            userPhone,
+                            UID,
+                            total_Price.getText().toString(),
+                            edtAdress.getText().toString(),
+                            selfPickup="no",
+                            dataHolder);
 
 
                     //Submit to Firebase
                     request.child(String.valueOf(System.currentTimeMillis())).setValue(request_order_model);
 
-                //Refresh Fragment to clear the cart.
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Customer_Cart_Fragment()).commit();
+                    //Refresh Fragment to clear the cart.
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Customer_Cart_Fragment()).commit();
 
                     Toast.makeText(getContext(), "Order Placed Successfully...", Toast.LENGTH_SHORT).show();
 
                     //Clear Cart
                     new DB_Manager(getContext()).DeleteTable();
-
-
+                }
             }
         });
 
@@ -204,6 +267,28 @@ public class Customer_Cart_Fragment extends Fragment {
         });
 
         alertDialog.show();
+    }
+
+    private void SelfPickUp_Order_Submit(){
+        Request_Order_Model request_order_model= new Request_Order_Model(userName,
+                userPhone,
+                UID,
+                total_Price.getText().toString(),
+                "Self Pickup",
+                selfPickup="yes",
+                dataHolder);
+
+
+        //Submit to Firebase
+        request.child(String.valueOf(System.currentTimeMillis())).setValue(request_order_model);
+
+        //Refresh Fragment to clear the cart.
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Customer_Cart_Fragment()).commit();
+
+        Toast.makeText(getContext(), "Order Placed Successfully...", Toast.LENGTH_SHORT).show();
+
+        //Clear Cart
+        new DB_Manager(getContext()).DeleteTable();
     }
 
 }

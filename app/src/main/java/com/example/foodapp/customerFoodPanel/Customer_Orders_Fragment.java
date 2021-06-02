@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 import com.example.foodapp.Model.Request_Order_Model;
 import com.example.foodapp.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class Customer_Orders_Fragment extends Fragment {
 
@@ -32,7 +34,8 @@ public class Customer_Orders_Fragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         //Firebase
-        DatabaseReference query= FirebaseDatabase.getInstance().getReference().child("Order_Requests");
+        String UID= FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Query query= FirebaseDatabase.getInstance().getReference().child("Order_Requests").orderByChild("uid").equalTo(UID);
 
         FirebaseRecyclerOptions<Request_Order_Model> options =
                 new FirebaseRecyclerOptions.Builder<Request_Order_Model>()

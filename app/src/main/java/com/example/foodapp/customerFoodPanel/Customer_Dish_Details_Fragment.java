@@ -83,7 +83,6 @@ public class Customer_Dish_Details_Fragment extends Fragment {
         //Add to Cart Button
         btn_cart.setOnClickListener(v -> {
             String result= new DB_Manager(getContext()).insertDbData(name,price,imageURL, quantity.getText().toString());
-            Toast.makeText(getContext(), result, Toast.LENGTH_LONG).show();
 
             btn_cart.setImageResource(R.drawable.ic_cart_after_addition_24);
             btn_cart.setEnabled(false);
