@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodapp.Model.Request_Order_Model;
@@ -25,6 +27,14 @@ public class Customer_Order_Adapter extends FirebaseRecyclerAdapter<Request_Orde
         myViewHolder.order_ID.setText("ID# "+getRef(position).getKey());
         myViewHolder.order_Status.setText(convertCodeToStatus(request_order_model.getStatus()));
         myViewHolder.order_Address.setText(request_order_model.getAddress());
+
+        myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity= (AppCompatActivity)v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Customer_Order_Details_Fragment()).addToBackStack(null).commit();
+            }
+        });
     }
 
     @NonNull
@@ -37,12 +47,14 @@ public class Customer_Order_Adapter extends FirebaseRecyclerAdapter<Request_Orde
 
     public class myViewHolder extends RecyclerView.ViewHolder {
         TextView order_ID, order_Status, order_Address;
+        CardView cardView;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
             order_ID= itemView.findViewById(R.id.order_ID);
             order_Status= itemView.findViewById(R.id.order_Status);
             order_Address= itemView.findViewById(R.id.order_Address);
+            cardView= itemView.findViewById(R.id.customer_order_cardView);
         }
     }
 

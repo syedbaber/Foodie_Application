@@ -20,6 +20,7 @@ public class MainMenu extends AppCompatActivity {
 
         sign_Up= (Button)findViewById(R.id.btn_signup);
         signin_Email=(Button)findViewById(R.id.btn_signinwithEmail);
+        signin_Phone=findViewById(R.id.btn_signinwithPhone);
 
         sign_Up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +34,14 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(getApplicationContext(), User_Login.class);
+                startActivity(intent);
+            }
+        });
+
+        signin_Phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getApplicationContext(), Admin_Login.class);
                 startActivity(intent);
             }
         });
