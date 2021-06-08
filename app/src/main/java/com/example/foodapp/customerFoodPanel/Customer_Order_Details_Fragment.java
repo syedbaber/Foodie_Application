@@ -17,6 +17,12 @@ import com.example.foodapp.R;
 
 public class Customer_Order_Details_Fragment extends Fragment {
     Button btn_trackOrder;
+    String Order_ID;
+
+    public Customer_Order_Details_Fragment(String Order_key){
+        this.Order_ID= Order_key;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,6 +38,7 @@ public class Customer_Order_Details_Fragment extends Fragment {
             public void onClick(View v) {
                 AppCompatActivity activity=(AppCompatActivity)v.getContext();
                 Intent intent= new Intent(v.getContext(), Track_Order.class);
+                intent.putExtra("Order_key",Order_ID);
                 activity.startActivity(intent);
             }
         });

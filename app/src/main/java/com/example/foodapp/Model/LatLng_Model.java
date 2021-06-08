@@ -1,30 +1,31 @@
 package com.example.foodapp.Model;
 
 public class LatLng_Model {
-    private double Latitude;
-    private double Longitude;
+    private double customer_Latitude;
+    private double customer_Longitude;
 
     public LatLng_Model() {
     }
 
-    public LatLng_Model(double latitude, double longitude) {
-        Latitude = latitude;
-        Longitude = longitude;
+    public LatLng_Model(double customer_Latitude, double customer_Longitude) {
+        this.customer_Latitude = customer_Latitude;
+        this.customer_Longitude = customer_Longitude;
+
     }
 
-    public double getLatitude() {
-        return Latitude;
+    public double getCustomer_Latitude() {
+        return customer_Latitude;
     }
 
-    public void setLatitude(double latitude) {
-        Latitude = latitude;
+    public void setCustomer_Latitude(double customer_Latitude) {
+        this.customer_Latitude = customer_Latitude;
     }
 
-    public double getLongitude() {
-        return Longitude;
+    public double getCustomer_Longitude() {
+        return customer_Longitude;
     }
 
-    public void setLongitude(double longitude) {
-        Longitude = longitude;
+    public void setCustomer_Longitude(double customer_Longitude) {
+        this.customer_Longitude = customer_Longitude;
     }
 }

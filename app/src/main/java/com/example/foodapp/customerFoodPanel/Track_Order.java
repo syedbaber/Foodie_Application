@@ -25,16 +25,21 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Track_Order extends AppCompatActivity implements LocationSource.OnLocationChangedListener {
+public class Track_Order extends AppCompatActivity implements GoogleMap.OnMyLocationChangeListener {
     private FusedLocationProviderClient client;
     private SupportMapFragment mapFragment;
     
     private int REQUEST_CODE = 111;
 
+    private String Order_ID="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track__order);
+
+        Order_ID= getIntent().getExtras().getString("Order_key", "defaultKey");
+        Toast.makeText(this, Order_ID, Toast.LENGTH_SHORT).show();
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.trackOrderMap);
 
@@ -83,7 +88,7 @@ public class Track_Order extends AppCompatActivity implements LocationSource.OnL
                                     location.getLongitude()
                             );
 
-                            FirebaseDatabase.getInstance().getReference("Order_Location").child("1622653829576").setValue(model);
+                            FirebaseDatabase.getInstance().getReference("Order_Location").child(Order_ID).setValue(model);
                         }
                     });
                 }
@@ -106,12 +111,14 @@ public class Track_Order extends AppCompatActivity implements LocationSource.OnL
     }
 
     @Override
-    public void onLocationChanged(Location location) {
+    public void onMyLocationChange(Location location) {
         LatLng_Model model= new LatLng_Model(
                 location.getLatitude(),
                 location.getLongitude()
         );
 
-        FirebaseDatabase.getInstance().getReference("Order_Location").child("1622653829576").setValue(model);
+        FirebaseDatabase.getInstance().getReference("Order_Location").child(Order_ID).setValue(model);
+
     }
+
 }
