@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.foodapp.Admin_Home;
 import com.example.foodapp.Common.Common;
 import com.example.foodapp.R;
 import com.example.foodapp.Remote.iGeoCoordinates;
@@ -106,7 +107,14 @@ public class Admin_Order_Tracking extends FragmentActivity implements OnMapReady
             }
         }
 
-        displayLocation();
+        try{
+            displayLocation();
+        }
+        catch (Exception e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -145,53 +153,13 @@ public class Admin_Order_Tracking extends FragmentActivity implements OnMapReady
 
 
                     }
-                    else {
-                        Toast.makeText(this, "Couldn't get your location.", Toast.LENGTH_SHORT).show();
-                    }
+//                    else {
+//                        Toast.makeText(this, "Couldn't get your location.", Toast.LENGTH_SHORT).show();
+//                    }
                 }
             }
 
-//            private void drawRoute(LatLng yourLocation, String clientAddress) {
-//                mServices.getGeoCode(clientAddress).enqueue(new Callback<String>() {
-//                    @Override
-//                    public void onResponse(Call<String> call, Response<String> response) {
-//                        try {
-//                            JSONObject jsonObject= new JSONObject(response.body());
-//
-//                            String lat= ((JSONArray)jsonObject.get("results"))
-//                                    .getJSONObject(0)
-//                                    .getJSONObject("geometry")
-//                                    .getJSONObject("location")
-//                                    .get("lat").toString();
-//
-//                            String lng= ((JSONArray)jsonObject.get("results"))
-//                                    .getJSONObject(0)
-//                                    .getJSONObject("geometry")
-//                                    .getJSONObject("location")
-//                                    .get("lng").toString();
-//
-////                            LatLng orderLocation= new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
-//                            LatLng orderLocation= new LatLng(34.149502, 73.199501);
-//
-//                            Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.ic_home_pink);
-//                            bitmap= Common.scaleBitmap(bitmap,70,70);
-//
-//                            MarkerOptions marker= new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(bitmap))
-//                                    .title("clientAddress")   //You can title whatever you want
-//                                    .position(orderLocation);
-//                            mMap.addMarker(marker);
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<String> call, Throwable t) {
-//
-//                    }
-//                });
-//            }
+
 
             private void createLocationRequest() {
                 mLocationRequest = new LocationRequest();
