@@ -32,7 +32,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Track_Order extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -44,6 +48,8 @@ public class Track_Order extends FragmentActivity implements OnMapReadyCallback,
     private static final int LOCATION_PERMISSION_REQUEST = 1001;
 
     private Location mLastLocation;
+
+    private LatLng riderLocation;
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
@@ -64,82 +70,6 @@ public class Track_Order extends FragmentActivity implements OnMapReadyCallback,
         setContentView(R.layout.activity_track__order);
 
         Order_ID = getIntent().getExtras().getString("Order_key", "defaultKey");
-
-//        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.trackOrderMap);
-//
-//        client = LocationServices.getFusedLocationProviderClient(Track_Order.this);
-//
-//        if (ActivityCompat.checkSelfPermission(Track_Order.this, Manifest.permission.ACCESS_FINE_LOCATION)
-//                == PackageManager.PERMISSION_GRANTED) {
-//
-//            getCurrentLocation();
-//            mapFragment.getMapAsync(this);
-//        }
-//
-//        else {
-//            ActivityCompat.requestPermissions(Track_Order.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
-//        }
-//
-//    }
-
-//    private void getCurrentLocation() {
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//
-//            return;
-//        }
-//
-//        Task<Location> task= client.getLastLocation();
-//            task.addOnSuccessListener(new OnSuccessListener<Location>() {
-//                @Override
-//                public void onSuccess(Location location) {
-//                    if(location != null){
-//                        LatLng latLng= new LatLng(location.getLatitude(),location.getLongitude());
-//
-//                        MarkerOptions markerOptions= new MarkerOptions().position(latLng).title("You are here!");
-//                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,14));
-//                        mMap.addMarker(markerOptions).showInfoWindow();
-//
-//                        //Saving location in Firebase
-//                        SendLocationFirebase(location);
-//                    }
-//                }
-//            });
-//    }
-//
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//
-//        if(requestCode == REQUEST_CODE){
-//            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-//                getCurrentLocation();
-//            }
-//            else {
-//                Toast.makeText(this, "Permission Denied...", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
-//
-//    @Override
-//    public void onLocationChanged(@NonNull Location location) {
-//        SendLocationFirebase(location);
-//        Toast.makeText(this, "Location Saved...", Toast.LENGTH_SHORT).show();
-//    }
-//
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        mMap= googleMap;
-//    }
-//
-//
-//    private void SendLocationFirebase(Location location){
-//        LatLng_Model model= new LatLng_Model(
-//                location.getLatitude(),
-//                location.getLongitude()
-//        );
-//
-//        FirebaseDatabase.getInstance().getReference("Order_Location").child(Order_ID).setValue(model);
-//    }
 
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -179,23 +109,42 @@ public class Track_Order extends FragmentActivity implements OnMapReadyCallback,
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(yourLocation));
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
 
-                //-------------Getting order address from Order Adapter----------//
-//                Intent intent= getIntent();
-//                clientAddress=intent.getStringExtra("clientAddress");
-//
-//
-//                //Point marker on client address
-//                getLocationFromAddress(getApplicationContext(), clientAddress);  //Calling fun for pointer as well as get client LatLng.
+                //-------------Getting Rider coordinates and adding marker----------//
+                    getRiderCoordinates();
 
+                if(riderLocation != null){
+                    mMap.addMarker(new MarkerOptions().position(riderLocation).title("Rider")).showInfoWindow();
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(riderLocation));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+                }
 
                 //--------------------------//
 
 
             }
-//            else {
-//                Toast.makeText(this, "Couldn't get your location.", Toast.LENGTH_SHORT).show();
-//            }
         }
+    }
+
+    private void getRiderCoordinates() {
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Rider_Location").child(Order_ID);
+        ValueEventListener eventListener= reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Double riderLatitude= snapshot.child("rider_Latitude").getValue(Double.class);
+                    Double riderLongitude= snapshot.child("rider_Longitude").getValue(Double.class);
+
+                    riderLocation= new LatLng(riderLatitude, riderLongitude);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Rider location not available", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
 
