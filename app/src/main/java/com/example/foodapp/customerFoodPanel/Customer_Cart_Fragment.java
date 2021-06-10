@@ -227,7 +227,7 @@ public class Customer_Cart_Fragment extends Fragment {
         alertDialog.setView(edtAdress);
 
 
-        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton("Confirm Order", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -259,7 +259,7 @@ public class Customer_Cart_Fragment extends Fragment {
             }
         });
 
-        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertDialog.setNeutralButton("Back", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -270,25 +270,43 @@ public class Customer_Cart_Fragment extends Fragment {
     }
 
     private void SelfPickUp_Order_Submit(){
-        Request_Order_Model request_order_model= new Request_Order_Model(userName,
-                userPhone,
-                UID,
-                total_Price.getText().toString(),
-                "Self Pickup",
-                selfPickup="yes",
-                dataHolder);
+        AlertDialog.Builder alertDialog= new AlertDialog.Builder(getContext());
+        alertDialog.setTitle("Confirm Order");
+        alertDialog.setMessage("Are you sure to place the order with 'Self Pickup'?");
+
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Request_Order_Model request_order_model= new Request_Order_Model(userName,
+                        userPhone,
+                        UID,
+                        total_Price.getText().toString(),
+                        "Self Pickup",
+                        selfPickup="yes",
+                        dataHolder);
 
 
-        //Submit to Firebase
-        request.child(String.valueOf(System.currentTimeMillis())).setValue(request_order_model);
+                //Submit to Firebase
+                request.child(String.valueOf(System.currentTimeMillis())).setValue(request_order_model);
 
-        //Refresh Fragment to clear the cart.
-        getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Customer_Cart_Fragment()).commit();
+                //Refresh Fragment to clear the cart.
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Customer_Cart_Fragment()).commit();
 
-        Toast.makeText(getContext(), "Order Placed Successfully...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Order Placed Successfully...", Toast.LENGTH_SHORT).show();
 
-        //Clear Cart
-        new DB_Manager(getContext()).DeleteTable();
+                //Clear Cart
+                new DB_Manager(getContext()).DeleteTable();
+            }
+        });
+
+        alertDialog.setNeutralButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alertDialog.show();
     }
 
 }
