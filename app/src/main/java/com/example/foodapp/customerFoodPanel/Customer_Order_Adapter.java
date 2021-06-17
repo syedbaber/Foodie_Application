@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,32 +41,41 @@ public class Customer_Order_Adapter extends FirebaseRecyclerAdapter<Request_Orde
             @Override
             public void onClick(View v) {
                 String Order_key = getRef(position).getKey();
+
+                //----------Sending location---------//
+
+                try {
+
+                    LocationManager lm = (LocationManager) v.getContext().getSystemService(Context.LOCATION_SERVICE);
+                    if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+                    Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    double longitude = location.getLongitude();
+                    double latitude = location.getLatitude();
+
+                    LatLng_Model model = new LatLng_Model(
+                            longitude,
+                           latitude
+                    );
+
+                    FirebaseDatabase.getInstance().getReference("Order_Location").child(Order_key).setValue(model);
+
+                }
+                catch (Exception e){
+                   // Toast.makeText(v.getContext(), "Please turn on Location to get ease in delivery...", Toast.LENGTH_SHORT).show();
+                }
+
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Customer_Order_Details_Fragment(Order_key)).addToBackStack(null).commit();
 
-                //----------Testing---------//
-
-                if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                LocationManager lm = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-                Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                double longitude = location.getLongitude();
-                double latitude = location.getLatitude();
-
-                LatLng_Model model= new LatLng_Model(
-                        location.getLatitude(),
-                        location.getLongitude()
-                );
-
-                FirebaseDatabase.getInstance().getReference("Order_Location").child(Order_key).setValue(model);
 
                 //--------------------------//
             }

@@ -31,7 +31,10 @@ public class Customer_Orders_Fragment extends Fragment {
         getActivity().setTitle("Orders");
 
         recyclerView= view.findViewById(R.id.Order_List);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
 
         //Firebase
         String UID= FirebaseAuth.getInstance().getCurrentUser().getUid();
