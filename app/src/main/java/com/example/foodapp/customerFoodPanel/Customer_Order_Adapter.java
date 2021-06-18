@@ -3,6 +3,8 @@ package com.example.foodapp.customerFoodPanel;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.view.LayoutInflater;
@@ -36,6 +38,10 @@ public class Customer_Order_Adapter extends FirebaseRecyclerAdapter<Request_Orde
         myViewHolder.order_ID.setText("ID# " + getRef(position).getKey());
         myViewHolder.order_Status.setText(convertCodeToStatus(request_order_model.getStatus()));
         myViewHolder.order_Address.setText(request_order_model.getAddress());
+
+        if(request_order_model.getSelfPickup().equals("yes")){
+            myViewHolder.order_Address.setTextColor(Color.parseColor("#1167b1"));
+        }
 
         myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +118,7 @@ public class Customer_Order_Adapter extends FirebaseRecyclerAdapter<Request_Orde
             txt_Status= "On my way.";
         
         else if (status.equals("2"))
-            txt_Status= "Order delivered";
+            txt_Status= "Completed";
         
         return txt_Status;
     }
