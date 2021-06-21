@@ -3,10 +3,12 @@ package com.example.foodapp.customerFoodPanel;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +29,10 @@ public class Customer_Home_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        View v= inflater.inflate(R.layout.fragment_customer__home_,null);
-       getActivity().setTitle("Home");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#FFFFFF'>Home</font>"));
 
-       rcv= v.findViewById(R.id.rclView);
+
+        rcv= v.findViewById(R.id.rclView);
        rcv.setLayoutManager(new LinearLayoutManager(getContext()));
 
        DatabaseReference query= FirebaseDatabase.getInstance().getReference().child("FoodDetails");

@@ -1,6 +1,9 @@
 package com.example.foodapp;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -23,9 +26,7 @@ public class User_Home extends AppCompatActivity implements BottomNavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__home);
-
-        Toolbar toolbar= findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#FFFFFF'>Home</font>"));
 
         navigationView=findViewById(R.id.customer_bottom_navigation);
         navigationView.setOnNavigationItemSelectedListener(this);

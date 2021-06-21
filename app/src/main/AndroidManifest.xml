@@ -55,6 +55,7 @@
             android:name=".User_Login"
             android:label="User Login" />
         <activity android:name=".User_Home" />
+
         <activity android:name=".PhoneVerification" />
         <activity
             android:name=".User_Registration"

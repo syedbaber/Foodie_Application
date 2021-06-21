@@ -16,4 +16,7 @@
     <color name="SignUp_color">#7DC42C</color>
     <color name="light_gray">#E7E7E7</color>
     <color name="foodPandaColor">#d60e64</color>
+
+    <color name="titlebackgroundcolor">#D60E64</color>
+    <color name="titletextcolor">#FFFFFF</color>
 </resources>

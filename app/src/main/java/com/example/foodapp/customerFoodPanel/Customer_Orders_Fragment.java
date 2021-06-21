@@ -2,10 +2,12 @@ package com.example.foodapp.customerFoodPanel;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +30,8 @@ public class Customer_Orders_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_customer__orders_, container, false);
-        getActivity().setTitle("Orders");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#FFFFFF'>Orders</font>"));
+
 
         recyclerView= view.findViewById(R.id.Order_List);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());

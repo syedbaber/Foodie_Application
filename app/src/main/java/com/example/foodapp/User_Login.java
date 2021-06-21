@@ -32,6 +32,8 @@ public class User_Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__login2);
 
+        getSupportActionBar().hide();
+
         firebaseAuth=firebaseAuth.getInstance();
         emailId=(EditText)findViewById(R.id.email_Login);
         password=(EditText)findViewById(R.id.password_Login);

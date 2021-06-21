@@ -9,11 +9,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Html;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,7 +67,7 @@ public class Customer_Cart_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_customer__cart_, container, false);
 
         //Set Title
-        getActivity().setTitle("Cart");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#FFFFFF'>Cart</font>"));
 
         recyclerView=view.findViewById(R.id.cart_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

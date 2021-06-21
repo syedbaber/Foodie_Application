@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().hide();
+
         imageView= (ImageView) findViewById(R.id.Foodie_title_logo);
         textView= (TextView) findViewById(R.id.textView7);
 

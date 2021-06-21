@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +37,8 @@ public class Customer_Profile_Fragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_customer__account_, container, false);
 
         //Set Title
-        getActivity().setTitle("Profile");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(Html.fromHtml("<font color='#FFFFFF'>Profile</font>"));
+
 
         Name= view.findViewById(R.id.User_Name);
         Email= view.findViewById(R.id.User_Email);
