@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -59,22 +62,6 @@ public class User_Registration extends AppCompatActivity {
 
                  rootNode= FirebaseDatabase.getInstance();
 
-
-//                String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//                reference = FirebaseDatabase.getInstance().getReference("User").child(useridd);
-//
-//                //Get all the values
-//                String First_name= txt_fname.getEditText().getText().toString();
-//                String Last_name= txt_lname.getEditText().getText().toString();
-//                String email= txt_email.getEditText().getText().toString();
-//                String Pwd= txt_password.getEditText().getText().toString();
-//                String confPwd= txt_confpassword.getEditText().getText().toString();
-//                String Phone= txt_phone.getEditText().getText().toString();
-//
-//                UserHelperClass helperClass= new UserHelperClass(First_name,Last_name,email,Pwd,confPwd,Phone);
-//
-//                reference.setValue(helperClass);
-
                 Register();  //Registering Email for Authentication
 
 
@@ -83,16 +70,28 @@ public class User_Registration extends AppCompatActivity {
     }
 
     private void Register(){
+        String Fname= txt_fname.getEditText().getText().toString();
+        String Lname= txt_lname.getEditText().getText().toString();
         String Email= txt_email.getEditText().getText().toString();
         String Password= txt_password.getEditText().getText().toString();
         String ConfPassword= txt_confpassword.getEditText().getText().toString();
+        String Phn= txt_phone.getEditText().getText().toString();
 
-        if(TextUtils.isEmpty(Email)){
+        if(TextUtils.isEmpty(Fname)){
+            txt_fname.setError("Enter First Name");
+            return;
+        }
+        else if(TextUtils.isEmpty(Lname)){
+            txt_lname.setError("Enter Last Name");
+            return;
+        }
+
+        else if(TextUtils.isEmpty(Email)){
             txt_email.setError("Enter your Email");
             return;
         }
         else if(TextUtils.isEmpty(Password)){
-            txt_email.setError("Enter your password");
+            txt_password.setError("Enter your password");
             return;
         }
         else if(TextUtils.isEmpty(ConfPassword)){
@@ -111,42 +110,56 @@ public class User_Registration extends AppCompatActivity {
             txt_email.setError("Invalid Email");
             return;
         }
+        else if(TextUtils.isEmpty(Phn) || Phn.length() <10){
+            txt_phone.setError("Enter valid number");
+            return;
+        }
 
-        progressDialog.setMessage("Please wait...");
-        progressDialog.show();
-        progressDialog.setCanceledOnTouchOutside(false);
+        else {
 
-        firebaseAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(this, task -> {
-            if(task.isSuccessful()){
+            ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
 
-                //--------------- Adding Registered Userdata to firebase
-                String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                reference = FirebaseDatabase.getInstance().getReference("User").child(useridd);
+            if (netInfo == null) {
+                Toast.makeText(this, "Please check your internet connection", Toast.LENGTH_SHORT).show();
+            } else {
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+                progressDialog.setCanceledOnTouchOutside(false);
 
-                //Get all the values
-                String First_name= txt_fname.getEditText().getText().toString();
-                String Last_name= txt_lname.getEditText().getText().toString();
-                String email= txt_email.getEditText().getText().toString();
-                String Pwd= txt_password.getEditText().getText().toString();
-                String confPwd= txt_confpassword.getEditText().getText().toString();
-                String Phone= txt_phone.getEditText().getText().toString();
+                firebaseAuth.createUserWithEmailAndPassword(Email, Password).addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
 
-                UserHelperClass helperClass= new UserHelperClass(First_name,Last_name,email,Pwd,confPwd,Phone);
+                        //--------------- Adding Registered Userdata to firebase
+                        String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        reference = FirebaseDatabase.getInstance().getReference("User").child(useridd);
 
-                reference.setValue(helperClass);
+                        //Get all the values
+                        String First_name = txt_fname.getEditText().getText().toString();
+                        String Last_name = txt_lname.getEditText().getText().toString();
+                        String email = txt_email.getEditText().getText().toString();
+                        String Pwd = txt_password.getEditText().getText().toString();
+                        String confPwd = txt_confpassword.getEditText().getText().toString();
+                        String Phone = txt_phone.getEditText().getText().toString();
 
-                //------------------
+                        UserHelperClass helperClass = new UserHelperClass(First_name, Last_name, email, Pwd, confPwd, Phone);
 
-                Toast.makeText(User_Registration.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
-                Intent intent= new Intent(User_Registration.this, User_Home.class);
-                startActivity(intent);
-                finish();
+                        reference.setValue(helperClass);
+
+                        //------------------
+
+                        Toast.makeText(User_Registration.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(User_Registration.this, User_Home.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(User_Registration.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+                    progressDialog.dismiss();
+                });
             }
-            else {
-                Toast.makeText(User_Registration.this, "Registration Failed", Toast.LENGTH_SHORT).show();
-            }
-            progressDialog.dismiss();
-        });
+        }
+
 
     }
 

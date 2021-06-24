@@ -38,15 +38,33 @@
             android:inputType="textEmailAddress"
             android:text="syedbabermehmood@gmail.com"/>
 
-        <EditText
+<!--        <EditText-->
+<!--            android:id="@+id/password_Login"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:ems="10"-->
+<!--            android:hint="Password"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:text="111111"/>-->
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password_Login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:text="111111"/>
+            app:boxBackgroundColor="@color/white"
+            app:passwordToggleEnabled="true"
+            app:hintEnabled="false"
+            app:boxStrokeColor="#40C0DC">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="111111"
+                android:inputType="textPassword"
+                android:hint="Password"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btn_login"
