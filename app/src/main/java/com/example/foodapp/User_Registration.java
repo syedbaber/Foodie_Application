@@ -79,6 +79,8 @@ public class User_Registration extends AppCompatActivity {
 
         if(TextUtils.isEmpty(Fname)){
             txt_fname.setError("Enter First Name");
+            txt_fname.setFocusableInTouchMode(true);
+            txt_fname.requestFocus();
             return;
         }
         else if(TextUtils.isEmpty(Lname)){
@@ -111,7 +113,7 @@ public class User_Registration extends AppCompatActivity {
             return;
         }
         else if(TextUtils.isEmpty(Phn) || Phn.length() <10){
-            txt_phone.setError("Enter valid number");
+            txt_phone.setError("Enter valid phone number");
             return;
         }
 
@@ -122,7 +124,9 @@ public class User_Registration extends AppCompatActivity {
 
             if (netInfo == null) {
                 Toast.makeText(this, "Please check your internet connection", Toast.LENGTH_SHORT).show();
-            } else {
+            }
+
+            else {
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
                 progressDialog.setCanceledOnTouchOutside(false);
