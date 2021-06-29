@@ -1,122 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".customerFoodPanel.Customer_Cart_Fragment"
     android:orientation="vertical">
 
-    <LinearLayout
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cart_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/emptyCart_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:orientation="vertical"
-        android:background="#F8F8F8">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="@+id/cart_recyclerView">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cart_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </androidx.recyclerview.widget.RecyclerView>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:src="@drawable/telescope" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/browsFood_TV"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/emptyCart_Layout"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="200dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:src="@drawable/telescope"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/browsFood_TV"
-                android:text="Brows some food"
-                android:layout_gravity="center"
-                android:textColor="@color/foodPandaColor"
-                android:textStyle="italic"
-                android:textSize="18sp"/>
-
-
-        </LinearLayout>
-
+            android:layout_gravity="center"
+            android:text="Brows some food"
+            android:textColor="@color/foodPandaColor"
+            android:textSize="18sp"
+            android:textStyle="italic" />
 
 
     </LinearLayout>
 
 
-
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="#cccccc"
+        android:orientation="horizontal"
         android:paddingTop="10dp"
-        android:layout_marginBottom="10dp">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
             android:text="Total       Rs. "
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:textSize="20sp"
-            android:paddingLeft="20dp"/>
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/total_Price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/total_Price"
             android:text="1000"
             android:textColor="@color/foodPandaColor"
-            android:textStyle="bold"
             android:textSize="20sp"
-            />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="10dp">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
             android:text="Include Delivery (Charges Rs. 20)"
-            android:textColor="@color/black"
-            android:paddingLeft="10dp"/>
+            android:textColor="@color/black" />
 
         <CheckBox
+            android:id="@+id/Delivery_Checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Delivery_Checkbox"
             android:buttonTint="#008EFF" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginBottom="70dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/deleteTable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clear Cart"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp"
+            android:text="Clear Cart" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/btn_placeOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Place Order"
-            android:layout_marginLeft="100dp" />
+            android:layout_marginRight="20dp"
+            android:text="Place Order" />
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

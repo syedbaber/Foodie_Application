@@ -69,7 +69,7 @@ public class Customer_Order_Adapter extends FirebaseRecyclerAdapter<Request_Orde
 
                     LatLng_Model model = new LatLng_Model(
                             longitude,
-                           latitude
+                            latitude
                     );
 
                     FirebaseDatabase.getInstance().getReference("Order_Location").child(Order_key).setValue(model);

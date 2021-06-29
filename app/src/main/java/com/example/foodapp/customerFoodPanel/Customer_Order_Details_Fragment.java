@@ -86,7 +86,7 @@ public class Customer_Order_Details_Fragment extends Fragment {
                 pickup= SelfPickup;
 
                 //Setting Completed tag and Location button visibility
-                if(status.equals("1") && pickup.equals("no")){
+                if(status.equals("1") ||status.equals("0")   && pickup.equals("no")){
                     btn_trackOrder.setVisibility(View.VISIBLE);
                 }
 
